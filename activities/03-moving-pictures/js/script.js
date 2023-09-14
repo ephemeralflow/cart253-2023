@@ -26,7 +26,8 @@ let circle1 = {
     x: 0,
     y: 250,
     size: 100,
-    fill: (255, 255, 255, 200),
+    fill: 255,
+    alpha: 200,
     speed: 1,
     growth: 0.25,
     relativeSize: 2,
@@ -36,6 +37,8 @@ let circle2 = {
     x: 500, 
     y: 0,
     size: 50,
+    fill: 255,
+    alpha: 200,
     speed: - 1,
     growth: 0.9
 };
@@ -57,7 +60,7 @@ function setup() {
 function draw() {
     //Background
     background(bg.red, bg.green, bg.blue);
-    bg.red = bg.red + 1;
+    bg.red = map(circle1.size, 100, width, 0, 255);
 
     //Circle 1
         //Movement
@@ -67,16 +70,17 @@ function draw() {
     circle1.size = circle1.size + circle1.growth;
     circle1.size = constrain(circle1.size, 0, width);
         //Shape
-    fill(circle1.fill);
+    fill(circle1.fill, circle1.alpha);
     ellipse(circle1.x, circle1.y, circle1.size, circle1.size);
 
     //Circle 2
         //Movement
     circle2.x = circle2.x + circle2.speed;
-    circle2.x = constrain(circle2.x, width / circle1.relativeSize, width);
+    circle2.x = constrain(circle2.x, width / 2, width);
         //Size
     circle2.size = circle1.size * circle2.growth;
         //Shape
+    fill(circle2.fill, circle2.alpha);
     ellipse(circle2.x, circle2.y, circle2.size, circle2.size);
     
 }
