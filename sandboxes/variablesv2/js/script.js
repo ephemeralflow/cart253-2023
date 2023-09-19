@@ -74,7 +74,12 @@ function draw() {
     function setBackgroundToRainbowGradient(){
         let gradient = drawingContext.createLinearGradient(0,0,width,height);
         gradient.addColorStop(0,"red");
-        gradient.addColorStop(1/6,"orange");
+        gradient.addColorStop(2/6,"orange");
+        gradient.addColorStop(2/6,"yellow");
+        gradient.addColorStop(3/6,"green");
+        gradient.addColorStop(4/6,"blue");
+        gradient.addColorStop(5/6,"indigo");
+        gradient.addColorStop(6/6,"violet");
         drawingContext.fillStyle = gradient;
         drawingContext.fillRect(0,0,width,height);
     }
