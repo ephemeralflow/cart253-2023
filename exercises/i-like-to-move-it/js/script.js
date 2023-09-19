@@ -49,6 +49,17 @@ let circle1 = {
     fillb: 206,
 };
 
+let ellipse2 = {
+    x: 250,
+    y: 10,
+    w: 100,
+    h: 400,
+    fillr: 54,
+    fillg: 72,
+    fillb: 162,
+    speed: 1.05,
+};
+
 /**
  * Description of setup
 */
@@ -76,22 +87,41 @@ function draw() {
     square1.size = square1.size + 1;
     square1.size = constrain(square1.size, 0, width);
 
-    // Ellipse
+    // Ellipse 1
     fill(ellipse1.fillr, ellipse1.fillg, ellipse1.fillb);
     ellipse(ellipse1.x, ellipse1.y, ellipse1.w, ellipse1.h);
-    // Circle X movement
+    // Ellipse 1 X movement
     ellipse1.x = ellipse1.x * ellipse1.speed;
     ellipse1.x = constrain(ellipse1.x, 0, width);
-    // Circle Y movement
+    // Ellipse 1 Y movement
     ellipse1.y = ellipse1.y * ellipse1.speed
     ellipse1.y = constrain(ellipse1.y, 0, width);
+    // Ellipse 1 X movement (2)
+    ellipse1.x = ellipse1.x * ellipse1.speed;
+    ellipse1.x = constrain(ellipse1.x, 0, width);
 
-    // Circle
+    // Circle 1
     fill(circle1.fillr, circle1.fillg, circle1.fillb);
     circle(mouseX, mouseY, circle1.size);
     
     circle1.size = circle1.size - 1;
     circle1.size = constrain(circle1.size, 20, width);
+
+    // Ellipse 2
+    
+    fill(ellipse2.fillr, ellipse2.fillg, ellipse2.fillb);
+    //I don't know how to explain this but spin explode 
+    angleMode(DEGREES);
+    for (let i = 0; i < 5; i++){
+        rotate(30);
+        ellipse(ellipse2.x, ellipse2.y, ellipse2.w, ellipse2.h);
+    }
+    // Ellipse 2 Y movement
+    ellipse2.y = ellipse2.y * ellipse2.speed
+    ellipse2.y = constrain(ellipse2.y, 0, width);
+    
+    
+    
     
 
 
