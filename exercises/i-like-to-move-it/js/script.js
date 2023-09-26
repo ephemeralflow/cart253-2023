@@ -1,9 +1,8 @@
 /**
  * I Like To Move It
- * Author Name
+ * Scarlett Perez
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * moving things
  */
 
 "use strict";
@@ -42,22 +41,22 @@ let ellipse1 = {
     speed: 1.03,
 };
 
+let ellipse2 = {
+    x: 10,
+    y: 10,
+    w: 100,
+    h: 300,
+    fillr: 72,
+    fillg: 150,
+    fillb: 80,
+    speed: 1.03,
+};
+
 let circle1 = {
     size: 200,
     fillr: 143,
     fillg: 200,
     fillb: 206,
-};
-
-let ellipse2 = {
-    x: 250,
-    y: 10,
-    w: 100,
-    h: 400,
-    fillr: 54,
-    fillg: 72,
-    fillb: 162,
-    speed: 1.05,
 };
 
 /**
@@ -76,11 +75,10 @@ function setup() {
 function draw() {
     //Background
     background(bg.r,bg.g,bg.b);
-        //change later
     bg.g = (bg.g + 1);
     bg.g = constrain(bg.g, 0, 77)
 
-    // Square
+    // Square that grows
     fill(square1.fillr, square1.fillg, square1.fillb);
     rectMode(CENTER);
     square(square1.x, square1.y, square1.size);
