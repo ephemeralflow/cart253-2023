@@ -8,25 +8,27 @@
 
 "use strict";
 
-let covid19 = {
+let img;
+let frown;
+function preload() {
+    img = loadImage ('assets/images/CHEERING.jpg');
+    frown = loadImage('assets/images/slightly-frowning-face.png');
+}
+
+let meanie = {
     x: 0,
     y: 250,
     size: 100,
     vx: 0,
     vy: 0,
     speed: 5,
-    fill: {
-        r: 255,
-        g: 0,
-        b: 0
-    }
 }
 
 let user = {
     x: undefined,
     y: undefined,
     size: 100,
-    fill: 255,
+    fill: 0,
 }
 
 let Static = 10000;
@@ -35,9 +37,11 @@ let Static = 10000;
  * Description of setup
 */
 function setup() {
+    image(img,0,0);
+    image(frown,0,0);
     createCanvas(windowWidth, windowHeight);
-    covid19.y = random(0, height);
-    covid19.vx = covid19.speed
+    meanie.y = random(0, height);
+    meanie.vx = meanie.speed
 }
 
 
@@ -46,36 +50,50 @@ function setup() {
 */
 function draw() {
     background(0);
-    // Loop for the static background, does the points that flahs around
+    image (img, 10,10,windowWidth,windowHeight)
+    // Loop for the static background, makes the points that flash around, it reminds me of those really old glitter images from back then in the internet, I think its kinda funny (and kinda ugly... but I like it)
     for (let i = 0; i < Static; i++) {
         let bgx = random(0, width);
         let bgy = random(0, height);
         stroke(255);
         point(bgx,bgy);
     }
-    //Movement = shape of the COVID circle
-    covid19.x = covid19.x + covid19.vx;
-    covid19.y = covid19.y + covid19.vy;
-    fill(covid19.fill.r,covid19.fill.g,covid19.fill.b);
-    noStroke();
-    ellipse(covid19.x, covid19.y, covid19.size, covid19.size);
 
-    //Makes it that the COVID changes height after reaching the end of the screen
-    if (covid19.x > width){
-        covid19.x = 0
-        covid19.y = random(0, height);
+    //Movement = shape of the MEANIE not wanting you to be happy circle
+    meanie.x = meanie.x + meanie.vx;
+    meanie.y = meanie.y + meanie.vy;
+    image (frown, meanie.x, meanie.y)
+    fill(0);
+
+    //Makes it that the MEANIE changes height after reaching the end of the screen
+    //how to make meanie follow you computer help
+    if (meanie.x > width){
+        meanie.x = 0
+        meanie.y = random(0, height);
     }
 
+    //makes it that if both MEANIE and USER touch, the program will end.
+    let d = dist(meanie.x, meanie.y, user.x, user.y);
+    if (d < meanie.size  && d < user.size ){
+        noLoop();
+    } 
+
+    // Make circle chasing have less alpha further away? ITS NOT WORKING
+    //I just changed everything and I know even less how to do that whoops
+    /*if (d < meanie.size  && d < user.size ){
+        fill(meanie.fill.r,meanie.fill.g,meanie.fill.b, meanie.fill.a);
+    } else (d > meanie.size  && d > user.size);{
+        meanie.fill.a = meanie.fill.a / 2;
+        fill(meanie.fill.r,meanie.fill.g,meanie.fill.b, meanie.fill.a);
+    }; */
+
+    //User Circle
+    fill(user.fill);
+    ellipse(user.x, user.y, user.size, user.size);    
+}
+
+function mouseDragged() {
     // User circle, follows the mouse
     user.x = mouseX;
     user.y = mouseY;
-    fill(user.fill);
-    ellipse(user.x, user.y, user.size, user.size);
-
-    //makes it that if both COVID and USER touch, the program will end.
-    let d = dist(covid19.x, covid19.y, user.x, user.y);
-    if (d < covid19.size  && d < user.size ){
-        noLoop();
     }
-
-}
