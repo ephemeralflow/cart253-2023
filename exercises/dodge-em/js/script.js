@@ -10,9 +10,13 @@
 
 let img;
 let frown;
+let img2;
+let userimg;
 function preload() {
     img = loadImage ('assets/images/CHEERING.jpg');
-    frown = loadImage('assets/images/slightly-frowning-face.png');
+    frown = loadImage('assets/images/ogreemoji.png');
+    img2 = loadImage ('assets/images/UNCHEERING.png')
+    userimg = loadImage ('assets/images/happysmile.png')
 }
 
 let meanie = {
@@ -28,7 +32,11 @@ let user = {
     x: undefined,
     y: undefined,
     size: 100,
-    fill: 0,
+    fill: {
+        r: 146,
+        g: 223,
+        b: 255,
+    },
 }
 
 let Static = 10000;
@@ -39,6 +47,8 @@ let Static = 10000;
 function setup() {
     image(img,0,0);
     image(frown,0,0);
+    image(img2,0,0);
+    image(userimg,0,0)
     createCanvas(windowWidth, windowHeight);
     meanie.y = random(0, height);
     meanie.vx = meanie.speed
@@ -55,8 +65,11 @@ function draw() {
     for (let i = 0; i < Static; i++) {
         let bgx = random(0, width);
         let bgy = random(0, height);
+        //let bgsize = 2;
         stroke(255);
         point(bgx,bgy);
+        fill(255);
+        //circle(bgx,bgy,bgsize);
     }
 
     //Movement = shape of the MEANIE not wanting you to be happy circle
@@ -76,6 +89,7 @@ function draw() {
     let d = dist(meanie.x, meanie.y, user.x, user.y);
     if (d < meanie.size  && d < user.size ){
         noLoop();
+        image (img2, 10,10,windowWidth,windowHeight)
     } 
 
     // Make circle chasing have less alpha further away? ITS NOT WORKING
@@ -88,8 +102,10 @@ function draw() {
     }; */
 
     //User Circle
-    fill(user.fill);
-    ellipse(user.x, user.y, user.size, user.size);    
+    noStroke();
+    fill(user.fill.r, user.fill.g, user.fill.b);
+    //ellipse(user.x, user.y, user.size, user.size);
+    image(userimg, user.x, user.y)    
 }
 
 function mouseDragged() {
