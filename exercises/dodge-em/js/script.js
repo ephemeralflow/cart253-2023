@@ -1,28 +1,28 @@
 /**
- * Title of Project
- * Author Name
- * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
- */
-
+ * Happiness Simulator
+ * Scarlett Perez
+ * Your goal is to make sure you dont get touched by the ogre, imagine, as if your inner demons. It wants you to be upset and if touched, "you" will enter hysterics (hence the bg change). Imagine it as if your biggest enemy is actually yourself, but takes the form as the "meanie". Inner conflict!!!
+**/
 "use strict";
 
+//Setting up all the labels that the program would use for it to work.
 let img;
 let frown;
 let img2;
 let userimg;
+let userimg2;
 function preload() {
     img = loadImage ('assets/images/CHEERING.jpg');
     frown = loadImage('assets/images/ogreemoji.png');
     img2 = loadImage ('assets/images/UNCHEERING.png')
     userimg = loadImage ('assets/images/happysmile.png')
+    userimg2 = loadImage ('assets/images/slightly-frowning-face.png')
 }
 
 let meanie = {
     x: 0,
     y: 250,
-    size: 100,
+    size: 120,
     vx: 0,
     vy: 0,
     speed: 5,
@@ -32,18 +32,12 @@ let user = {
     x: undefined,
     y: undefined,
     size: 100,
-    fill: {
-        r: 146,
-        g: 223,
-        b: 255,
-    },
+    fill: 0,
 }
 
 let Static = 10000;
 
-/**
- * Description of setup
-*/
+//setting up all the images so that they work + other labels + canvas
 function setup() {
     image(img,0,0);
     image(frown,0,0);
@@ -54,62 +48,62 @@ function setup() {
     meanie.vx = meanie.speed
 }
 
-
-/**
- * Description of draw()
-*/
 function draw() {
     background(0);
-    image (img, 10,10,windowWidth,windowHeight)
-    // Loop for the static background, makes the points that flash around, it reminds me of those really old glitter images from back then in the internet, I think its kinda funny (and kinda ugly... but I like it)
+    imageMode(CORNERS);
+    image (img, 0,0,windowWidth,windowHeight)
+    // Loop for the static background, makes the points that flash around, it reminds me of those really old glitter images from back then in the internet, I think its kinda funny (and kinda ugly... but I like it and I think it fits, imagine as if your mind is filled with static, something is wrong.)
     for (let i = 0; i < Static; i++) {
         let bgx = random(0, width);
         let bgy = random(0, height);
-        //let bgsize = 2;
         stroke(255);
         point(bgx,bgy);
         fill(255);
-        //circle(bgx,bgy,bgsize);
     }
 
-    //Movement = shape of the MEANIE not wanting you to be happy circle
+    //Shape of the MEANIE + image
     meanie.x = meanie.x + meanie.vx;
     meanie.y = meanie.y + meanie.vy;
+    imageMode(CENTER);
     image (frown, meanie.x, meanie.y)
     fill(0);
 
     //Makes it that the MEANIE changes height after reaching the end of the screen
-    //how to make meanie follow you computer help
     if (meanie.x > width){
         meanie.x = 0
         meanie.y = random(0, height);
-    }
+    } 
 
     //makes it that if both MEANIE and USER touch, the program will end.
+    //Also changes the backhround image to an inverted "upset" version
     let d = dist(meanie.x, meanie.y, user.x, user.y);
     if (d < meanie.size  && d < user.size ){
         noLoop();
-        image (img2, 10,10,windowWidth,windowHeight)
+        imageMode(CORNER);
+        image (img2, 0,0,windowWidth,windowHeight)
     } 
+    //I couldn't make this work but I feel SO BAD not giving this sooner so what it was supposed to do was make the shape go faster depending on distance but it's not working </3
+    else (d > meanie.size && d > user.size); {
+        let i = 5; i < 50; i ++
+        meanie.speed = i;
+    };
 
-    // Make circle chasing have less alpha further away? ITS NOT WORKING
-    //I just changed everything and I know even less how to do that whoops
-    /*if (d < meanie.size  && d < user.size ){
-        fill(meanie.fill.r,meanie.fill.g,meanie.fill.b, meanie.fill.a);
-    } else (d > meanie.size  && d > user.size);{
-        meanie.fill.a = meanie.fill.a / 2;
-        fill(meanie.fill.r,meanie.fill.g,meanie.fill.b, meanie.fill.a);
-    }; */
-
-    //User Circle
+    //User Circle + setting the image of the circle to a smile
     noStroke();
-    fill(user.fill.r, user.fill.g, user.fill.b);
-    //ellipse(user.x, user.y, user.size, user.size);
+    fill(user.fill);4
+    imageMode(CENTER);
     image(userimg, user.x, user.y)    
+
+    if (d < meanie.size  && d < user.size ){
+        //Changes the USER circle to a frown when hit by the "MEANIE"
+        imageMode(CENTER);
+        fill(user.fill);
+        image(userimg2, user.x, user.y)    
+    }
 }
 
 function mouseDragged() {
-    // User circle, follows the mouse
+    // User circle, follows the mouse which you have to hold the right click button to move.
     user.x = mouseX;
     user.y = mouseY;
     }
