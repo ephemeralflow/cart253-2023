@@ -100,7 +100,7 @@ function move() {
 function checkOffscreen() {
     //Sad Ending
     if (circle1.x > width || circle1.x < 0 || circle1.y > height ||circle1.y <0 || circle2.x > width || circle2.x < 0 || circle2.y > height ||circle2.y <0){
-        state = `sadness`
+        state = `sadness`;
     }
 }
 
