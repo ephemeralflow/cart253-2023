@@ -76,6 +76,7 @@ function draw() {
 }
 
 function title() {
+    push();
     textSize(64);
     fill(176,11,30);
     textAlign(CENTER,CENTER);
@@ -83,12 +84,16 @@ function title() {
     textSize(20);
     textAlign(CENTER,CENTER);
     text(`Move by holding down the mouse\nbutton and moving your mouse.`, width/2,320);
-    
+    pop(); 
+
+    push();
     fill(102,44,44)
     textSize(15);
     textAlign(CENTER,CENTER);
     text(`You're being followed by someone who loves you.\nThey believe you love them back.\nYou don't know them.\nDon't get caught in this stalker's twisted love.`, width/2,400);
+    pop();
 }
+
 
 function simulation(){
     move();
@@ -101,14 +106,17 @@ function simulation(){
 
 function lose() {
     //Text for bad ending
+    push();
     textSize(55);
     fill(176,11,30);
     textAlign(CENTER,CENTER);
     text(`"You love me too right?!"`, width/2,height/2);
+    pop();
 }
 
 function flee() {
     //Text for the ending that you get from leaving the canvas, neutral ending
+    push();
     textSize(72);
     fill(176,11,30);
     textAlign(CENTER,CENTER);
@@ -127,6 +135,7 @@ function flee() {
     text(`...and ran...`, width/2,570);
     textSize(2); 
     text(`...and ran...`, width/2,580);
+    pop();
 }
 
 function survival(){
