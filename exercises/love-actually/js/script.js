@@ -140,6 +140,7 @@ function flee() {
 
 function survival(){
     //Setting a timer that would count down for the amont of time the user has to hold out and survive
+    push();
     textSize(30);
     if (frameCount % 60 == 0 && timer > 0) {
         timer --;
@@ -149,6 +150,7 @@ function survival(){
         survived();
         noLoop();
     }
+    pop();
 }
 
 function survived() {
@@ -157,10 +159,12 @@ function survived() {
     imageMode(CORNERS);
     image (bgimg, 0,0,600,600)
     //Text that shows that you won/fled
+    push();
     textSize(64);
     fill(176,11,30);
     textAlign(CENTER,CENTER);
     text(`You escaped!`, width/2,height/2);
+    pop();
 }
 function move() {
     //Making it possible for the stalker to move
