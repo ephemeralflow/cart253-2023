@@ -4,24 +4,24 @@
         "name": "Mika",
         "backgroundColor": "#336699"
       },
-      "you": {
-        "name": "You",
+      "iidtinse": {
+        "name": "idk I don't think I need someone else",
         "backgroundColor": "#996633"
       }
     },
-    "dialog": {
-      "scene1": [
-        {
+    "Scene1": {
+      "PAGES": {
+        "Page0" :{
           "type": "speech",
           "character": "mika",
           "speech": "Hello!"
         },
 
-        {
+        "Page1" :{
           "type": "speech",
           "character": "mika",
           "speech": "I seem to have lost my memory… can ya help me?"
-        }],
+        }},
         
     "choice1" : [
             {
@@ -31,13 +31,13 @@
             }
         }],
 
-    "scene2": [
-        {
+    "scene2": {
+        "Page2" :{
           "type": "speech",
           "character": "mika",
           "speech": "Really?"
         }
-    ],
+      },
 
     "scene3": [
         {

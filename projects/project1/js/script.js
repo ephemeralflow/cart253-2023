@@ -4,8 +4,11 @@
  * 
  * This is a template. You must fill in the title, author, 
  * and this description to match your project!
- * As reference, I used Leon and Alice's code for a Visual Novel Engine.
- * 
+ * As reference, I used Leon and Alice's, Tasha's and David's code for a Visual Novel Engine.
+ * I'll add the links later
+ * 1 
+ * 2 (https://app.qoom.io/tutorials/vnengine/guide.md)
+ * 3 (https://langintro.com/js-vine/docs/index.html)
  */
 
 "use strict";
@@ -36,36 +39,10 @@ rightTop = new Position(0.9, 0.1, 1, 0);
 
 photo = new Character("", {position: upperCenter});*/
 
-
-/*function Character(Mika)
-{
-    this.Mika = characterName;
-    if (Mika == '')
-    {
-        Mika = "anon" + novel.anonymous++;
-    }
-    this.escName = escape(Mika);
-    this.color = "#000000";
-    this.image = new Image();
-    this.imageElement = document.createElement("img");
-    this.imageElement.setAttribute("id", this.escName);
-    this.src = null;
-    this.prevSrc = null;
-    this.avatar = "";
-    this.domRef = null;
-    this.position = new Position(0, 0, true);
-    this.prevPosition = new Position(0, 0, true);
-    this.alpha = 1.0;
-    this.visibility = "visible";
-};*/
-
 const dialog = "/dialog.json";
 
 var TEXT_MAP = new Map()
 var sampleText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-
-var text1 = "yasssssssssssssssssssssssss";
-var text2 = "omg noooo"
 
 var TEXTAREA_HEIGHT = 150;
 var MARGIN_BOTTOM = 10;
@@ -73,14 +50,19 @@ var MARGIN_SIDE = 5;
 var TEXT_MARGIN = 5;
 var TEXT_LINE_SPACING = 5;
 
+let json, to;
+
+var pageNum = 0;
+var currentPage;
+
 //take 2
 async function grabData() {
 	// Load the data
 	
-	/* Fetches the data from the server */
-	const resp = await fetch(vnData)
+	//Fetches the data from the server
+	const resp = await fetch(dialog)
 
-	/* Putting the data into an array */
+	//Putting the data into an array 
 	json = await resp.json();
 	
 	currentPage = Object.keys(json.Scene1.PAGES)[pageNum];
