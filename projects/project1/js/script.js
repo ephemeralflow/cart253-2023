@@ -244,7 +244,11 @@ function keyPressed() {
 
 function paragraphAdvance(){
 
-    let textObj = TEXT_MAP.get(sampleText);
+    textSize(20);
+    textWrap(WORD);
+    text(sampleText, 0, 10, 100);
+
+    /*let textObj = TEXT_MAP.get(sampleText);
     let paragraphs = textObj.paragraphs;
 
     let paraIndex = textObj.paraIndex;
@@ -265,7 +269,7 @@ function paragraphAdvance(){
     }else{
         //NO new paragraph OR new line
         textObj.charIndex++;
-    }
+    }*/
 
     /*if (paraIndex=0) {
         
