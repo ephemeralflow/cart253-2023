@@ -1,0 +1,49 @@
+{
+    "characters": {
+      "mika": {
+        "name": "Mika",
+        "backgroundColor": "#336699"
+      },
+      "you": {
+        "name": "You",
+        "backgroundColor": "#996633"
+      }
+    },
+    "dialog": {
+      "scene1": [
+        {
+          "type": "speech",
+          "character": "mika",
+          "speech": "Hello!"
+        },
+
+        {
+          "type": "speech",
+          "character": "mika",
+          "speech": "I seem to have lost my memory… can ya help me?"
+        }],
+        
+    "choice1" : [
+            {
+            "Options": {
+                "Sure!": "scene2",
+                "No thank you 💀": "scene3"
+            }
+        }],
+
+    "scene2": [
+        {
+          "type": "speech",
+          "character": "mika",
+          "speech": "Really?"
+        }
+    ],
+
+    "scene3": [
+        {
+          "type": "speech",
+          "character": "mika",
+          "speech": "Oh… that's alright!"
+        }]
+    }
+  }
