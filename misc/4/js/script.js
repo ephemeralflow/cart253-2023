@@ -36,7 +36,11 @@ function preload() {
 function setup() {
 
 }
+var novel_script;
 
+function Character(charactername) {
+
+}
 
 /**
  * Description of draw()
