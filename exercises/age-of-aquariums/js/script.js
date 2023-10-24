@@ -11,6 +11,21 @@
 let school = [];
 let schoolSize = 40;
 
+let timer = 15;
+let fishpng;
+let bg;
+
+let user = {
+    x: 0,
+    y: 0,
+    size: 100
+};  
+
+function preload() {
+    //preloading the images for later
+    fishpng = loadImage ('assets/images/fish.png');
+    bg = loadImage ('assets/images/background.jpg');
+}
 function setup() {
   createCanvas(600, 600);
 
@@ -22,31 +37,66 @@ function setup() {
   }
 }
 
-// createFish(x,y)
-// Creates a new JavaScript Object describing a fish and returns it
 function createFish(x, y) {
   let fish = {
     x: x,
     y: y,
-    size: 50,
+    size: random(30,40),
     vx: 0,
     vy: 0,
-    speed: 2
+    speed: 2,
+    fill: {
+        r: 200,
+        g: random (50,100),
+        b: random (50,150)
+    }
   };
   return fish;
 }
 
 function draw() {
     background(0);
+    imageMode(CORNERS);
+    image (bg, 0,0,600,600)
+    push()
+    fill(0)
+    textSize(30)
+    text(timer, 50, 50);
+    pop()
+
+    moveUser();
+    displayUser();
+    fishgone();
   
     for (let i = 0; i < school.length; i++) {
       moveFish(school[i]);
       displayFish(school[i]);
     }
-  }
+    timetoeat()
+    ending1()
+    
+}
 
-// moveFish(fish)
-// Chooses whether the provided fish changes direction and moves it
+function timetoeat() {
+    push();
+    textSize(30);
+    if (frameCount % 60 == 0 && timer > 0) {
+        timer --;
+    }
+
+    if (timer == 0) {
+        ending2();
+        noLoop();
+    }
+    pop();
+
+    if (timer == 0 && (schoolSize >= 2 || schoolSize <= 38)) {
+        ending3();
+        noLoop();
+    }
+}
+
+
 function moveFish(fish) {
   // Choose whether to change direction
   let change = random(0, 1);
@@ -68,31 +118,65 @@ function moveFish(fish) {
 // Displays the provided fish on the canvas
 function displayFish(fish) {
   push();
-  fill(200, 100, 100);
+  fill(fish.fill.r,fish.fill.g,fish.fill.b);
   noStroke();
   ellipse(fish.x, fish.y, fish.size);
   pop();
 }
 
-// mousePressed() checks whether a fish in the school was clicked
-// and removes it if so
-function mousePressed() {
-    // Use a for loop to examine every fish in the school one by one
+function fishgone() {
     for (let i = 0; i < school.length; i++) {
-      // Store the current fish in the fish variable
-      let fish = school[i];
-      // Calculate the distance between the mouse position and the fish
-      let d = dist(mouseX, mouseY, fish.x, fish.y);
-      // If the distance means the mouse was clicked inside the fish
-      if (d < fish.size / 2) {
-        // Remove the fish using the splice() function which takes two arguments
-        // - The index to start remove elements from (i in our case)
-        // - The number of elements to remove from that position (just one for us)
-        school.splice(i, 1);
-        // Now that we've found our fish to remove, we don't want to continue
-        // going through the loop, so we end it prematurely with break
-        // This forces the for-loop to stop immediately
-        break;
-      }
+        let fish = school[i];
+        // Calculate the distance between the mouse position and the fish
+        let d = dist(mouseX, mouseY, fish.x, fish.y);
+        if (d < (user.size / 2) + fish.size / 2) {
+          school.splice(i, 1);
+          break;
+        }
     }
-  }
+}
+
+function displayUser() {
+    push();
+    fill(255);
+    imageMode(CENTER);
+    image(fishpng,user.x,user.y)
+    pop();
+}
+
+function moveUser() {
+    user.x = mouseX;
+    user.y = mouseY;
+}
+
+function ending1() {
+    if (school == 0) {
+        background(255)
+        textSize(64);
+        fill(176,11,30);
+        textAlign(CENTER,CENTER);
+        text(`You live another day\n Congrats!!!`, width/2,height/2);
+    }
+}
+
+function ending2() {
+    background(0);
+    push();
+    textSize(64);
+    fill(176,11,30);
+    textAlign(CENTER,CENTER);
+    text(`You died\n That's for not eating!!!`, width/2,height/2);
+    pop();
+}
+
+function ending3() {
+    background(0);
+    push();
+    textSize(64);
+    fill(176,11,30);
+    textAlign(CENTER,CENTER);
+    text(`You died`, width/2,height/2);
+    pop();
+}
+
+
