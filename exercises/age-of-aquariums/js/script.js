@@ -10,6 +10,7 @@
 
 let school = [];
 let schoolSize = 40;
+let state = `title`;
 
 let timer = 15;
 let fishpng;
@@ -64,6 +65,12 @@ function draw() {
     text(timer, 50, 50);
     pop()
 
+    if (state === `title`) {
+      title();
+    } else if (state === `simulation`) {
+      simulation();
+    }
+
     moveUser();
     displayUser();
     fishgone();
@@ -90,7 +97,7 @@ function timetoeat() {
     }
     pop();
 
-    if (timer == 0 && (schoolSize >= 2 || schoolSize <= 38)) {
+    if (timer == 0 && (schoolSize >= 2 && schoolSize <= 38)) {
         ending3();
         noLoop();
     }
@@ -131,6 +138,7 @@ function fishgone() {
         let d = dist(mouseX, mouseY, fish.x, fish.y);
         if (d < (user.size / 2) + fish.size / 2) {
           school.splice(i, 1);
+          schoolSize --;
           break;
         }
     }
@@ -179,4 +187,15 @@ function ending3() {
     pop();
 }
 
+function title() {
+  background(0);
+    push();
+    textSize(64);
+    fill(176,11,30);
+    textAlign(CENTER,CENTER);
+    text(`fish simulator`, width/2,height/2);
+    textSize(30);
+    text(`you've been fed go eat your food (or not)`, width/2,350);
+    pop();
+}
 
