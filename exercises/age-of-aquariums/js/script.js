@@ -10,7 +10,6 @@
 
 let school = [];
 let schoolSize = 40;
-let state = `title`;
 
 let timer = 15;
 let fishpng;
@@ -64,12 +63,6 @@ function draw() {
     textSize(30)
     text(timer, 50, 50);
     pop()
-
-    if (state === `title`) {
-      title();
-    } else if (state === `simulation`) {
-      simulation();
-    }
 
     moveUser();
     displayUser();
@@ -186,16 +179,3 @@ function ending3() {
     text(`You died`, width/2,height/2);
     pop();
 }
-
-function title() {
-  background(0);
-    push();
-    textSize(64);
-    fill(176,11,30);
-    textAlign(CENTER,CENTER);
-    text(`fish simulator`, width/2,height/2);
-    textSize(30);
-    text(`you've been fed go eat your food (or not)`, width/2,350);
-    pop();
-}
-
