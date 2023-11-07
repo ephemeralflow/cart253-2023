@@ -11,6 +11,7 @@
 let state = `title`
 let scene = 0;
 
+
 let name = " ";
 let txt = " ";
 
@@ -36,7 +37,7 @@ function preload() {
 
 }
 
-let scenes = [{
+/*let scenes = [{
     name: "v",
     txt: "hello everynyaaaaa",
 }, {
@@ -61,7 +62,7 @@ let scenes = [{
     , {
     name: "v",
     txt: "yoss",
-}]
+}]*/
 
 let choice1a = "what."
 let choice1b = "what?"
@@ -143,15 +144,19 @@ function title() {
     text(creditText, 1000, 500)
     pop()
 
-    /*push() TESTING RECTANGLE
+    /*push() //TESTING RECTANGLE
     fill(255, 0, 0)
-    rect(1150, 250, 300, 100);
+    rect(1150, 550, 300, 100);
     pop()*/
 }
 
 function gallery() {
     rect(width / 2, 300, 300, 55);
     //test rectangle
+}
+
+function credits() {
+    rect(width / 2, 300, 300, 55);
 }
 
 function simulation() {
@@ -240,7 +245,7 @@ function mousePressed() {
         state = `gallery`;
     }
 
-    if (state === `title` && mouseX >= 850 && mouseY >= 350 && mouseX <= 1150 && mouseY <= 450) {
+    if (state === `title` && mouseX >= 850 && mouseY >= 450 && mouseX <= 1150 && mouseY <= 550) {
         state = `credits`;
     }
 
@@ -259,6 +264,3 @@ function mousePressed() {
     }
 }
 
-function credits() {
-    rect(width / 2, 300, 300, 55);
-}
