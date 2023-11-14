@@ -8,8 +8,10 @@
 
 "use strict";
 
+//let backgroundNames = [ "bg1", "bg2"]
+
 let state = `simulation`
-let scene = 47;
+let scene = 70;
 
 let name = " ";
 let txt = " ";
@@ -40,7 +42,7 @@ let interval;
 
 //PIANO TIMER
 let endPianoTimer = 0;
-let pianoPartLength = 60 * 5;
+let pianoPartLength = 5;
 
 //let elevatorMus = false;
 
@@ -102,40 +104,21 @@ function draw() {
 
 function keyPressed() {
     if (scene == 31) {
-
-        //THIS IS NOT WORKING 
+        playNextNote();
         endPianoTimer++;
         if (endPianoTimer >= pianoPartLength) {
             scene = 32
             console.log(endPianoTimer)
-        }
-        //THIS IS NOT WORKING
-        //after some time, that the "piano" plays, it will go to the next scene
-
-
-        // Start our interval, calling playNextNote every 500 milliseconds
-        // Assign the result to interval to remember the interval
-        if (interval === undefined) {
-            interval = setInterval(playNextNote, 500);
-        } else {
-            // If they click when it's playing, clear the interval and set interval
-            // back to undefined to stop play
-            clearInterval(interval);
-            interval = undefined;
         }
     }
 }
 
 function playNextNote() {
     // Chose the note at the current position
-    let note = notes[currentNote];
+    let note = random(notes)
     // Play it
     synth.play(note, 0.2, 0, 0.4);
-    // Increase the current position and go back to 0 when we reach the end
-    currentNote = currentNote + 1;
-    if (currentNote === notes.length) {
-        currentNote = 0;
-    }
+
 }
 
 function title() {
@@ -512,3 +495,4 @@ function cinematicGraphics() {
         choices();
     }
 }
+

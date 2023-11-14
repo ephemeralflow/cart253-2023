@@ -256,4 +256,22 @@ let scenes = [{
 }, {
     name: "...",
     txt: "...",
+}, {
+    name: "...",
+    txt: "...",
+}, {
+    name: "You",
+    txt: "Let's go with three.", // THIRD END
+}, {
+    name: "Furina",
+    txt: "I guess-",
+}, {
+    name: "...",
+    txt: "...",
+}, {
+    name: "Furina",
+    txt: "...Where... are we...",
+}, {
+    name: "...",
+    txt: "...",
 }]
