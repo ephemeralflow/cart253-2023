@@ -9,7 +9,7 @@
 "use strict";
 
 let state = `simulation`
-let scene = 120;
+let scene = 134;
 
 
 let name = " ";
@@ -32,6 +32,23 @@ let vLikeBar = 0;
 let mobiusLikeBar = 0; //???
 let doctorLikeBar = 0;
 
+//SPRITES
+let doctorSerious;
+let doctorSmile;
+let doctorGrin;
+
+let vSmile;
+
+let mobiusSerious;
+
+let guard;
+
+// let spriteNames = ["doctorSerious", "doctorSmile"];
+// let characterSprites = {};
+
+let backgroundNames = ["doctorSerious", "doctorSmile", "doctorGrin"];
+let backgrounds = {};
+
 /**
  * Description of preload
 */
@@ -41,6 +58,21 @@ function preload() {
     CG1 = loadImage('assets/images/CG1.png');
     endCG1 = loadImage('assets/images/EndCG1.png');
     endCG3 = loadImage('assets/images/EndCG3.png');
+
+    doctorSerious = loadImage('assets/images/sprites/doctorSerious.png');
+    doctorSmile = loadImage('assets/images/sprites/doctorSmile.png');
+    doctorGrin = loadImage('assets/images/sprites/doctorGrin.png');
+
+    vSmile = loadImage('assets/images/sprites/vSmile.png');
+
+    mobiusSerious = loadImage('assets/images/sprites/mobiusSerious.png');
+
+    guard = loadImage('assets/images/sprites/guard.png');
+
+    // for (let i = 0; i < backgroundNames.length; i++) {
+    //     let backgroundName = backgroundNames[i];
+    //     backgrounds[backgroundName] = loadImage(`assets/images/sprites/${backgroundName}.png`);
+    // }
 
 }
 
@@ -181,6 +213,7 @@ function credits() {
 }
 
 function simulation() {
+    sprites();
     mainimgs();
     vntext();
     choices();
@@ -206,11 +239,16 @@ function menu() {
 
 function mainimgs() {
 
+    // push()
+    // let bgName = scenes[scene].bg;
+    // imageMode(CENTER)
+    // image(backgrounds[bgName], width / 2, 500);
+    // pop()
+
     //TEXTBOX
     push()
-    fill(255);
+    fill(255, 200);
     rectMode(CENTER);
-    rect(145, 465, 170, 50);
     rect(width / 2, 600, 1180, 200);
     pop()
     image(arrow, 1100, 550, 100, 100)
@@ -231,9 +269,8 @@ function vntext() {
     fill(0);
     textSize(30);
     textWrap(WORD);
-    text(scenes[scene].txt, 100, 520, 1000, 242);
-    textAlign(CENTER);
-    text(scenes[scene].name, 0, 450, 300);
+    text(scenes[scene].txt, 100, 550, 1000, 242);
+    text(scenes[scene].name, 100, 510, 300);
     pop();
 }
 
@@ -374,6 +411,67 @@ function choices() {
     }
 }
 
+function sprites() {
+    //GUARD SCENE ALONE
+    if (scene >= 25 && scene <= 54) {
+        push();
+        imageMode(CENTER);
+        image(guard, width / 2, 400, 425, 739);
+        pop();
+    }
+
+    //GUARD + V
+    if (scene >= 55 && scene <= 65) {
+        push();
+        imageMode(CENTER);
+        image(vSmile, 426, 420, 369, 609);
+        image(guard, 852, 400, 425, 739);
+        pop();
+    }
+
+    //V ALONE
+    if (scene >= 66 && scene <= 90) {
+        push();
+        imageMode(CENTER);
+        image(vSmile, width / 2, 420, 369, 609);
+        pop();
+    }
+
+    //V + DOCTOR
+    if (scene >= 91 && scene <= 105) {
+        push();
+        imageMode(CENTER);
+        image(vSmile, 426, 420, 369, 609);
+        image(doctorSmile, 852, 400, 425, 739);
+        pop();
+    }
+
+    //DOCTOR ALONE
+    if (scene >= 106 && scene <= 135) {
+        push();
+        imageMode(CENTER);
+        image(doctorSmile, width / 2, 400, 425, 739);
+        pop();
+    }
+
+    //DOCTOR + MOBIUS
+    if (scene >= 136 && scene <= 146) {
+        push();
+        imageMode(CENTER);
+        image(mobiusSerious, 426, 420, 410, 732);
+        image(doctorSmile, 852, 400, 425, 739);
+        pop();
+    }
+
+    //MOBIUS ALONE
+    if (scene >= 147 && scene <= 151) {
+        push();
+        imageMode(CENTER);
+        image(mobiusSerious, width / 2, 420, 410, 732);
+        pop();
+    }
+}
+
 function mousePressed() {
     allMenuButtons()
     //backToMainMenu()
@@ -485,7 +583,7 @@ function mousePressed() {
     //CHOICE 7
     //CHOICE 7A
     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 122) {
-        scene = 127;
+        scene = 128;
     }
 
     //CHOICE 7B

@@ -272,7 +272,7 @@ let scenes = [{
     name: " ",
     txt: "Walking into the room, you were greeted by who you guessed was The Doctor sitting at a table as he got up from his chair.",
 }, {
-    name: "Doctor",
+    name: "Doctor", //91
     txt: "What have you brought to me V?",
 }, {
     name: "V",
@@ -361,9 +361,11 @@ let scenes = [{
 }, {
     name: "Doctor",
     txt: "No matter what happens I'll make sure all your vitals are always at a safe level.",
+    //bg: "doctorSmile",
 }, {
     name: "Doctor", //121
     txt: "Good.",
+    bg: "doctorSmile",
 }, {
     name: "Doctor", //122
     txt: "Now… will you sign the contract?",
@@ -441,7 +443,7 @@ let scenes = [{
     txt: "Follow me.",
 }, {
     name: " ",
-    txt: "You followed Mobius closely behind her. She was definitely less approachable V. Rather you were starting to miss V already and their cheerful nature.",
+    txt: "You followed Mobius closely behind her. She was definitely less approachable than V. Rather you were starting to miss V already and their cheerful nature.",
 }, {
     name: "You",
     txt: "What did the Doctor mean with you being the only one that could?",
