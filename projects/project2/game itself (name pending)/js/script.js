@@ -17,10 +17,6 @@ let txt = " ";
 
 let arrow;
 
-let spriteOne;
-let spriteTwo;
-let spriteThree;
-
 let CG1;
 
 let endCG1;
@@ -42,9 +38,6 @@ let doctorLikeBar = 0;
 function preload() {
 
     arrow = loadImage('assets/images/right-arrow.png');
-    spriteOne = loadImage('assets/images/1.png');
-    spriteTwo = loadImage('assets/images/2.png');
-    spriteThree = loadImage('assets/images/3.png');
     CG1 = loadImage('assets/images/CG1.png');
     endCG1 = loadImage('assets/images/EndCG1.png');
     endCG3 = loadImage('assets/images/EndCG3.png');
