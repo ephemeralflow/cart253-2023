@@ -149,6 +149,9 @@ function draw() {
     }
     else if (state === `gallery`) {
         gallery();
+        if (mouseIsPressed && mouseX >= 100 && mouseY >= 100 && mouseX <= 400 && mouseY <= 300) {
+            galleryImages();
+        }
     }
     else if (state === `credits`) {
         credits();
@@ -666,9 +669,7 @@ function allMenuButtons() {
         state = `simulation`;
     }
 
-    if (state === `gallery` && mouseX >= 100 && mouseY >= 100 && mouseX <= 400 && mouseY <= 300) {
-        galleryImages();
-    }
+    
 }
 
 function galleryImages() {
