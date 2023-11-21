@@ -8,17 +8,20 @@
 
 "use strict";
 
+//CURRENT STATE + SCENE
 let state = `simulation`
-let scene = 134;
+let scene = 154;
 
-
+//variables for the name and the text they dau
 let name = " ";
 let txt = " ";
 
 let arrow;
 
+//testing CG
 let CG1;
 
+//Ending CGS
 let endCG1;
 let endCG3;
 
@@ -32,6 +35,16 @@ let vLikeBar = 0;
 let mobiusLikeBar = 0; //???
 let doctorLikeBar = 0;
 
+//PIANO
+let oscillator;
+let synth;
+let notes = [`F4`, `G4`, `Ab4`, `Bb4`, `C4`, `Db4`, `Eb4`, `F5`];
+let currentNote = 0;
+
+//PIANO TIMER
+let endPianoTimer = 0;
+let pianoPartLength = 10;
+
 //SPRITES
 let doctorSerious;
 let doctorSmile;
@@ -41,6 +54,9 @@ let vSmile;
 
 let mobiusSerious;
 
+let deltaSerious;
+let deltaSmile;
+
 let guard;
 
 // let spriteNames = ["doctorSerious", "doctorSmile"];
@@ -48,6 +64,8 @@ let guard;
 
 let backgroundNames = ["doctorSerious", "doctorSmile", "doctorGrin"];
 let backgrounds = {};
+
+
 
 /**
  * Description of preload
@@ -66,6 +84,9 @@ function preload() {
     vSmile = loadImage('assets/images/sprites/vSmile.png');
 
     mobiusSerious = loadImage('assets/images/sprites/mobiusSerious.png');
+
+    deltaSerious = loadImage('assets/images/sprites/deltaSerious.png');
+    deltaSmile = loadImage('assets/images/sprites/deltaSmile.png');
 
     guard = loadImage('assets/images/sprites/guard.png');
 
@@ -103,6 +124,14 @@ let choice7B = "Back out."
 */
 function setup() {
     createCanvas(1280, 720);
+
+    userStartAudio();
+    synth = new p5.PolySynth();
+
+    //Creating a new oscillator
+    oscillator = new p5.Oscillator(0, `sine`);
+    //Setting the oscillator amplitude down.
+    oscillator.amp(0.25);
 }
 
 
@@ -272,6 +301,17 @@ function vntext() {
     text(scenes[scene].txt, 100, 550, 1000, 242);
     text(scenes[scene].name, 100, 510, 300);
     pop();
+
+    if (scene == 156) {
+        push();
+        rectMode(CENTER)
+        rect(width / 2, height / 2, 500, 200)
+        fill(0)
+        textSize(30)
+        textAlign(CENTER);
+        text("To play the piano,\n press any key.", width / 2, 350)
+        pop();
+    }
 }
 
 function choices() {
@@ -476,7 +516,7 @@ function mousePressed() {
     allMenuButtons()
     //backToMainMenu()
 
-    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene !== 52 && scene !== 77 && scene !== 82) {
+    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene !== 52 && scene !== 77 && scene !== 82 && scene !== 156) {
         scene += 1;
         console.log(scene)
     }
@@ -698,5 +738,28 @@ function specialText() {
         textStyle(ITALIC)
     } if (scene == 65) {
         textStyle(NORMAL)
+    }
+}
+
+function keyPressed() {
+    if (scene == 156) {
+
+        playNextNote()
+        endPianoTimer++;
+        if (endPianoTimer >= pianoPartLength) {
+            scene = 157
+        }
+    }
+}
+
+function playNextNote() {
+    // Chose the note at the current position
+    let note = notes[currentNote];
+    // Play it
+    synth.play(note, 0.2, 0, 0.4);
+    // Increase the current position and go back to 0 when we reach the end
+    currentNote = currentNote + 1;
+    if (currentNote === notes.length) {
+        currentNote = 0;
     }
 }

@@ -461,14 +461,113 @@ let scenes = [{
     txt: " ",
 }, {
     name: " ",
-    txt: "DAY 2",
+    txt: "Act 1 Finished.",
 }, {
     name: " ",
-    txt: "But you were close. So close.",
+    txt: "...",
+}, {
+    name: "???",
+    txt: "Come on, it’s not that hard.",
+}, {
+    name: "???", //156
+    txt: "Try again, just follow the pointers I gave you earlier.",
+}, {
+    name: " ", //157
+    txt: "...",
+}, {
+    name: "???",
+    txt: "*sigh* You’re terrible at this!",
 }, {
     name: " ",
-    txt: "But you were close. So close.",
-}]
+    txt: "It’s ok, we can try again…",
+}, {
+    name: " ",
+    txt: "...",
+}, {
+    name: " ",
+    txt: "You wake up from the dream. Still a bit hazy from it, you sit up from the bed.",
+}, {
+    name: "???",
+    txt: "Finally, I thought you were never going to wake up, I was getting impatient.",
+}, {
+    name: " ",
+    txt: "At the door of the room you were in stood a person.",
+}, {
+    name: " ",
+    txt: "The appearance was eerily similar to that of the doctor, yet not really. Perhaps the two of them were siblings?",
+}, {
+    name: "???", //165
+    txt: "Come on, we don’t have all day. He’s waiting for you.",
+}, {
+    name: "???", //166
+    txt: "Use that head of yours and start thinking.",
+}, {
+    name: "???",
+    txt: "Then maybe you can actually guess who it is.",
+}, {
+    name: "???",
+    txt: "Or you can be a little bit smart about it and just wait.",
+}, {
+    name: " ", //169
+    txt: "The stranger looked at you disapprovingly, not allowing you an answer.",
+}, {
+    name: " ",
+    txt: "Not having an answer, you’ll just assume that you’re correct.",
+}, {
+    name: " ", //171
+    txt: "You followed the man as you thought about how hungry you were.",
+}, {
+    name: " ",
+    txt: "After the checkup with Mobius, you haven’t eaten anything. Suddenly thinking that maybe you should have eaten something before even stepping foot inside the building.",
+}, {
+    name: " ",
+    txt: "Either way, you supposed it was surgery so it made sense for you to not eat.",
+}, {
+    name: " ",
+    txt: "…Well it depended on what kind of surgery you were doing but you were hoping it wasn’t on any of your inner organs.",
+}, {
+    name: " ",
+    txt: "The man opened a door to a room that looked like some sort of lab.",
+}, {
+    name: " ",
+    txt: "Walking through another door, setting up equipment, was The Doctor himself.",
+}, {
+    name: " ", //177
+    txt: "All the medical equipment on the table was making you feel queasy. What did you truly get yourself into?",
+}, {
+    name: "Doctor",
+    txt: "Ah, there you are.",
+}, {
+    name: "Doctor",
+    txt: "Mobius already gave me the results of yesterday’s test. It seems that you are good to go.",
+}, {
+    name: "Doctor",
+    txt: "The test won’t take too long.",
+}, {
+    name: " ",
+    txt: "The Doctor then grabbed onto a syringe, filled with vibrant blue liquid. Almost like his earring, made you wonder if his earring actually had liquid inside of it.",
+}, {
+    name: " ",
+    txt: "Either way, The Doctor then motioned you to lie down on the bed.",
+}, {
+    name: "Doctor",
+    txt: "Look at me.",
+}, {
+    name: " ",
+    txt: "With his command, you did, only to feel a sting on your other arm. Seeing that you tried to look at the other side yet still at him, he spoke.",
+}, {
+    name: "Doctor",
+    txt: "It’s better for you to stay calm before the procedure, which is why I needed you to not focus on what I put in you. After all, it can give the opposite effect than what I need for the procedure.",
+}, {
+    name: " ",
+    txt: "His words were starting to blur out, you were starting to feel a bit sleepy.",
+}, {
+    name: " ",
+    txt: "Don’t worry, when you wake up, you will be… better.",
+}/*, {
+    name: " ",
+    txt: "txt.",
+}*/]
 
 let day3 = [{
     name: "You",
