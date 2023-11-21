@@ -519,6 +519,7 @@ function mousePressed() {
     allMenuButtons()
     //backToMainMenu()
 
+
     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene !== 52 && scene !== 77 && scene !== 82 && scene !== 156) {
         scene += 1;
         console.log(scene)
