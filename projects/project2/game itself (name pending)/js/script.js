@@ -5,12 +5,11 @@
  * STILL WORK IN PROGRESS the gallery isn't working right now and I don't know why so I'll fix it later counting as this is just a prototype. 
  * However, managed to add a menu that you can go back in forth with isn't that cool (I'm impressed with myself let me have this moment)
  */
-
 "use strict";
 
 //CURRENT STATE + SCENE
 let state = `simulation`
-let scene = 154;
+let scene = 0;
 
 //variables for the name and the text they dau
 let name = " ";
@@ -65,7 +64,8 @@ let guard;
 let backgroundNames = ["doctorSerious", "doctorSmile", "doctorGrin"];
 let backgrounds = {};
 
-
+let currentScene = "intro";
+let currentDialog = 0;
 
 /**
  * Description of preload
@@ -139,26 +139,53 @@ function setup() {
  * Description of draw()
 */
 function draw() {
-    background(0);
+    background(255);
 
-    if (state === `title`) {
-        title();
+    let line = script[currentScene][currentDialog];
+
+    if (line.characterImage !== undefined) {
+        image(line.characterImage, 100, 100);
     }
-    else if (state === `simulation`) {
-        simulation();
+
+    if (line.type === "speech") {
+        // Display the dialog and the next button etc.
+        text(line.text, 100, 100);
     }
-    else if (state === `gallery`) {
-        gallery();
-        if (mouseIsPressed && mouseX >= 100 && mouseY >= 100 && mouseX <= 400 && mouseY <= 300) {
-            galleryImages();
+    else if (line.type === "choice") {
+        for (let i = 0; i < line.choices.length; i++) {
+            let choice = line.choices[i];
+            rect(choice.button.x, choice.button.y, choice.button.w, choice.button.h)
+            textAlign(CENTER, CENTER);
+            text(choice.text, choice.button.x + choice.button.w / 2, choice.button.y + choice.button.h / 2);
         }
     }
-    else if (state === `credits`) {
-        credits();
+    else if (line.type === "transition") {
+        currentScene = line.nextScene;
+        currentDialog = 0;
     }
-    else if (state === `menu`) {
-        menu();
-    }
+
+
+
+
+
+    // if (state === `title`) {
+    //     title();
+    // }
+    // else if (state === `simulation`) {
+    //     simulation();
+    // }
+    // else if (state === `gallery`) {
+    //     gallery();
+    //     if (mouseIsPressed && mouseX >= 100 && mouseY >= 100 && mouseX <= 400 && mouseY <= 300) {
+    //         galleryImages();
+    //     }
+    // }
+    // else if (state === `credits`) {
+    //     credits();
+    // }
+    // else if (state === `menu`) {
+    //     menu();
+    // }
 }
 
 
@@ -297,13 +324,13 @@ function mainimgs() {
 
 function vntext() {
     //Displaying the text by using the arrays strings from earlier and also wrapping it by word so it doesn't overflow in case the lines are too long.
-    push();
-    fill(0);
-    textSize(30);
-    textWrap(WORD);
-    text(scenes[scene].txt, 100, 550, 1000, 242);
-    text(scenes[scene].name, 100, 510, 300);
-    pop();
+    // push();
+    // fill(0);
+    // textSize(30);
+    // textWrap(WORD);
+    // text(scenes[scene].txt, 100, 550, 1000, 242);
+    // text(scenes[scene].name, 100, 510, 300);
+    // pop();
 
     if (scene == 156) {
         push();
@@ -515,164 +542,185 @@ function sprites() {
     }
 }
 
+// function mousePressed() {
+//     allMenuButtons()
+//     //backToMainMenu()
+
+
+//     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene !== 52 && scene !== 77 && scene !== 82 && scene !== 156) {
+//         scene += 1;
+//         console.log(scene)
+//     }
+
+//     //CHOICE 1
+//     //CHOICE 1A
+//     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 10) {
+//         scene = 11;
+//     }
+
+//     //CHOICE 1B
+//     if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 10) {
+//         scene = 17;
+//     }
+
+//     //CHOICE 2
+//     //CHOICE 2A
+//     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 25) {
+//         scene = 26;
+//         guardTalk = true;
+//     }
+
+//     //CHOICE 2B
+//     if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 25) {
+//         scene = 49;
+//     }
+
+//     //CHOICE 3
+//     //CHOICE 3A
+//     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 38) {
+//         scene = 48;
+//     }
+
+//     //CHOICE 3B
+//     if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 38) {
+//         scene = 39;
+//     }
+
+//     //Guard TEXT (52)
+//     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 52 && guardTalk == true) {
+//         scene += 1;
+//     }
+
+//     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 52) {
+//         scene = 54;
+//     }
+
+//     //CHOICE 4
+//     //CHOICE 4A
+//     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 77) {
+//         scene = 78;
+//     }
+
+//     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 82) {
+//         scene = 86;
+//     }
+
+//     //CHOICE 4B
+//     if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 77) {
+//         scene = 83;
+//     }
+
+//     //CHOICE 5
+//     //CHOICE 5A
+//     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 98) {
+//         scene = 99;
+//         doctorLikeBar++
+//         vLikeBar++
+//     }
+
+//     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 101) {
+//         scene = 102;
+//     }
+
+//     //CHOICE 5B
+//     if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 98) {
+//         scene = 101;
+//     }
+
+//     //CHOICE 6
+//     //CHOICE 6A
+//     if (mouseX >= 430 && mouseX <= 850 && mouseY >= 143 && mouseY <= 197 && scene == 114) {
+//         scene = 115;
+//     }
+
+//     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 118) {
+//         scene = 114;
+//     }
+
+//     //CHOICE 6B
+//     if (mouseX >= 430 && mouseX <= 850 && mouseY >= 273 && mouseY <= 327 && scene == 114) {
+//         scene = 118;
+//     }
+
+//     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 121) {
+//         scene = 114;
+//     }
+
+//     //CHOICE 6C
+//     if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 114) {
+//         scene = 121;
+//     }
+
+//     //CHOICE 7
+//     //CHOICE 7A
+//     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 122) {
+//         scene = 128;
+//     }
+
+//     //CHOICE 7B
+//     if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 122) {
+//         scene = 123;
+//     }
+// }
+
+// function allMenuButtons() {
+//     if (state === `title` && mouseX >= 850 && mouseY >= 150 && mouseX <= 1150 && mouseY <= 250) {
+//         state = `simulation`;
+//     }
+
+//     if (state === `title` && mouseX >= 850 && mouseY >= 250 && mouseX <= 1150 && mouseY <= 450) {
+//         state = `gallery`;
+//     }
+
+//     if (state === `title` && mouseX >= 850 && mouseY >= 450 && mouseX <= 1150 && mouseY <= 550) {
+//         state = `credits`;
+//     }
+
+//     if (state === `gallery` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
+//         state = `title`;
+//     }
+
+//     if (state === `credits` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
+//         state = `title`;
+//     }
+
+//     if (state === `simulation` && mouseX >= 30 && mouseY >= 30 && mouseX <= 180 && mouseY <= 90) {
+//         state = `menu`;
+//     }
+
+//     if (state === `menu` && mouseX >= 470 && mouseY >= 478 && mouseX <= 528 && mouseY <= 500) {
+//         state = `title`;
+//         scene = 0;
+//     }
+
+//     if (state === `menu` && mouseX >= 730 && mouseY >= 478 && mouseX <= 770 && mouseY <= 500) {
+//         state = `simulation`;
+//     }
+// }
+
 function mousePressed() {
-    allMenuButtons()
-    //backToMainMenu()
+    allMenuButtons();
+    let line = script[currentScene][currentDialog];
 
-
-    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene !== 52 && scene !== 77 && scene !== 82 && scene !== 156) {
-        scene += 1;
-        console.log(scene)
+    if (line.type === "speech") {
+        currentDialog++;
+    }
+    else if (line.type === "choice") {
+        // Work out which choice they clicked!
+        for (let i = 0; i < line.choices.length; i++) {
+            let choice = line.choices[i];
+            if (mouseX > choice.button.x &&
+                mouseX < choice.button.x + choice.button.w &&
+                mouseY > choice.button.y &&
+                mouseY < choice.button.y + choice.button.h) {
+                // It was clicked
+                currentScene = choice.nextScene;
+                currentDialog = 0;
+            }
+        }
     }
 
-    //CHOICE 1
-    //CHOICE 1A
-    if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 10) {
-        scene = 11;
-    }
-
-    //CHOICE 1B
-    if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 10) {
-        scene = 17;
-    }
-
-    //CHOICE 2
-    //CHOICE 2A
-    if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 25) {
-        scene = 26;
-        guardTalk = true;
-    }
-
-    //CHOICE 2B
-    if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 25) {
-        scene = 49;
-    }
-
-    //CHOICE 3
-    //CHOICE 3A
-    if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 38) {
-        scene = 48;
-    }
-
-    //CHOICE 3B
-    if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 38) {
-        scene = 39;
-    }
-
-    //Guard TEXT (52)
-    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 52 && guardTalk == true) {
-        scene += 1;
-    }
-
-    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 52) {
-        scene = 54;
-    }
-
-    //CHOICE 4
-    //CHOICE 4A
-    if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 77) {
-        scene = 78;
-    }
-
-    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 82) {
-        scene = 86;
-    }
-
-    //CHOICE 4B
-    if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 77) {
-        scene = 83;
-    }
-
-    //CHOICE 5
-    //CHOICE 5A
-    if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 98) {
-        scene = 99;
-        doctorLikeBar++
-        vLikeBar++
-    }
-
-    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 101) {
-        scene = 102;
-    }
-
-    //CHOICE 5B
-    if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 98) {
-        scene = 101;
-    }
-
-    //CHOICE 6
-    //CHOICE 6A
-    if (mouseX >= 430 && mouseX <= 850 && mouseY >= 143 && mouseY <= 197 && scene == 114) {
-        scene = 115;
-    }
-
-    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 118) {
-        scene = 114;
-    }
-
-    //CHOICE 6B
-    if (mouseX >= 430 && mouseX <= 850 && mouseY >= 273 && mouseY <= 327 && scene == 114) {
-        scene = 118;
-    }
-
-    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 121) {
-        scene = 114;
-    }
-
-    //CHOICE 6C
-    if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 114) {
-        scene = 121;
-    }
-
-    //CHOICE 7
-    //CHOICE 7A
-    if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 122) {
-        scene = 128;
-    }
-
-    //CHOICE 7B
-    if (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444 && scene == 122) {
-        scene = 123;
-    }
 }
-
-function allMenuButtons() {
-    if (state === `title` && mouseX >= 850 && mouseY >= 150 && mouseX <= 1150 && mouseY <= 250) {
-        state = `simulation`;
-    }
-
-    if (state === `title` && mouseX >= 850 && mouseY >= 250 && mouseX <= 1150 && mouseY <= 450) {
-        state = `gallery`;
-    }
-
-    if (state === `title` && mouseX >= 850 && mouseY >= 450 && mouseX <= 1150 && mouseY <= 550) {
-        state = `credits`;
-    }
-
-    if (state === `gallery` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
-        state = `title`;
-    }
-
-    if (state === `credits` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
-        state = `title`;
-    }
-
-    if (state === `simulation` && mouseX >= 30 && mouseY >= 30 && mouseX <= 180 && mouseY <= 90) {
-        state = `menu`;
-    }
-
-    if (state === `menu` && mouseX >= 470 && mouseY >= 478 && mouseX <= 528 && mouseY <= 500) {
-        state = `title`;
-        scene = 0;
-    }
-
-    if (state === `menu` && mouseX >= 730 && mouseY >= 478 && mouseX <= 770 && mouseY <= 500) {
-        state = `simulation`;
-    }
-
-    
-}
-
 function galleryImages() {
     push()
     imageMode(CORNER)
@@ -765,3 +813,4 @@ function playNextNote() {
         currentNote = 0;
     }
 }
+

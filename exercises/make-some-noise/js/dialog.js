@@ -39,10 +39,10 @@ let scenes = [{
     txt: "*scoff* At least you're honest I GUESS.",
 }, {
     name: "Furina",
-    txt: "Oh REALLY?", //13
+    txt: "UGH.", //13
 }, {
     name: "Furina",
-    txt: "UGH it's fine.",
+    txt: "It's fine.",
 }, {
     name: "Furina",
     txt: "Listen here, and I'll only say it once.",
@@ -111,7 +111,7 @@ let scenes = [{
     txt: "I'm so sorry but you have like the musical skill of a toddler.",
 }, {
     name: "Furina",
-    txt: "NOT EVEN a toddler can do better than you oh my GOODNESS.",
+    txt: "NOT EVEN, a toddler can do better than you oh my GOODNESS.",
 }, {
     name: " ",
     txt: " ", // 38 CHOICE
@@ -254,24 +254,51 @@ let scenes = [{
     name: " ",
     txt: "Suddenly, a light appeared out of seemingly thin air.", //85 BG 2
 }, {
-    name: "...",
-    txt: "...",
+    name: "Furina",
+    txt: "Wait, what even is happening-",
 }, {
-    name: "...",
-    txt: "...",
+    name: "Furina",
+    txt: "Ugh. And here I thought things couldn't get any weirder.",
+}, {
+    name: "Furina",
+    txt: "Wait.",
+}, {
+    name: "Furina",
+    txt: "Isn't that Monsieur Neuvilette?", //88
+}, {
+    name: "Neuvilette",
+    txt: "Good day Lady Furina.", //89
+}, {
+    name: "Furina",
+    txt: "What's happening Neuvilette :[",
+}, {
+    name: "Neuvilette",
+    txt: "You are 3D.",
+}, {
+    name: "Furina",
+    txt: "What?",
+}, {
+    name: " ",
+    txt: " ", //93
 }, {
     name: "You",
-    txt: "Let's go with three.", // THIRD END
+    txt: "I'm going to try 3.", //94
 }, {
-    name: "Furina",
-    txt: "I guess-",
-}, {
-    name: "...",
+    name: " ",
     txt: "...",
 }, {
-    name: "Furina",
-    txt: "...Where... are we...",
-}, {
-    name: "...",
+    name: " ",
     txt: "...",
+}, {
+    name: " ",
+    txt: "Nothing happened.",
+}, {
+    name: " ",
+    txt: "Furina looked at you weirdly in response.",
+}, {
+    name: " ",
+    txt: "Which should you press?", //99
+}, {
+    name: " ",
+    txt: "You already pressed that one.", //100
 }]
