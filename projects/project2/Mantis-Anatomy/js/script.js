@@ -7,14 +7,17 @@
 "use strict";
 
 //CURRENT STATE + SCENE
-let state = `title`
-let scene = 0;
+let state = `simulation`
+let scene = 156;
 
 //variables for the name and the text they dau
 let name = " ";
 let txt = " ";
 
 let arrow;
+
+let content = "";
+let nameContent = "name";
 
 //TITLE SCREEN
 let titleScreen;
@@ -101,9 +104,9 @@ let backgrounds = {};
 let currentScene = "intro";
 let currentDialog = 0;
 
-// let textInput;
-// let textInputBox;
-// let dreamName = name;
+let textInput;
+let textInputBox;
+let dreamName = name;
 // let secretEnding = false;
 
 /**
@@ -411,6 +414,7 @@ function simulation() {
     endingGraphics();
     overlayGraphic();
     specialText();
+    nameInput()
 
     if (scene == 153) {
         act2Available = true;
@@ -916,7 +920,7 @@ function backgroundsForScenes() {
 
 function mousePressed() {
     allMenuButtons()
-    // nameInput()
+    nameInput()
     //backToMainMenu()
 
 
@@ -1134,24 +1138,23 @@ function mousePressed() {
     // }
 }
 
-// function nameInput() {
-//     // if (scene == 274) {
-//     //     textInput = createInput("");
-//     //     textInputBox = createP("Waiting");
-//     //     textInput.changed(enterText);
-//     // }
+function nameInput() {
 
-//     if (scene == 274) {
-//         textInput = createInput("");
-//         createInput.position(20, 20)
-//         textInputBox = createP("Waiting");
-//         textInput.changed(enterText);
-//     }
-// }
+    // push()
+    // fill(255)
+    // rectMode(CENTER)
+    // rect(width/2,height/2,300,100)
+    // pop()
+
+    // if (content === nameContent) {
+
+    // }
+}
+
 
 
 // function enterText() {
-//     if (scene == 274) {
+//     if (scene == 275) {
 //         if (textInput.value() == dreamName) {
 //             //go to the next scene
 //             secretEnding = true;
@@ -1403,28 +1406,36 @@ function specialText() {
 
 function keyPressed() {
     if (scene == 156) {
-
         playNextNote()
         endPianoTimer++;
+        console.log(endPianoTimer)
         if (endPianoTimer >= pianoPartLength) {
             scene = 157
+            endPianoTimer = 0;
+            pianoPartLength = 15;
         }
     }
 
     if (scene == 192) {
-        // ITS NOT WORKING BYE pianoPartLength = 10;
+        
         playNextNote()
         endPianoTimer++;
+        console.log(endPianoTimer)
         if (endPianoTimer >= pianoPartLength) {
             scene = 193
+            endPianoTimer = 0;
+            pianoPartLength = 20;
         }
     }
 
     if (scene == 271) {
         playNextNote()
         endPianoTimer++;
+        console.log(endPianoTimer)
         if (endPianoTimer >= pianoPartLength) {
             scene = 272
+            endPianoTimer = 0;
+            pianoPartLength = 10;
         }
     }
 }
