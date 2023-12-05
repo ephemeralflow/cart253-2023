@@ -1,5 +1,5 @@
 /**
- * MANTIS ANATOMY
+ * M.A.N.T.I.S. ANATOMY
  * Scarlett Perez
  * 
  * STILL WORK IN PROGRESS 
@@ -7,8 +7,8 @@
 "use strict";
 
 //CURRENT STATE + SCENE
-let state = `simulation`
-let scene = 156;
+let state = `gallery`
+let scene = 300;
 
 //variables for the name and the text they dau
 let name = " ";
@@ -17,10 +17,11 @@ let txt = " ";
 let arrow;
 
 let content = "";
-let nameContent = "name";
+let nameContent = "furina";
 
 //TITLE SCREEN
 let titleScreen;
+let altMenu;
 let act1Arrow;
 let act2Arrow;
 
@@ -31,9 +32,19 @@ let actButtonsShow = false;
 
 let act2Available = false;
 
-//CGS
+//Variables for the CG images
 let CG1;
 let CG2;
+let CG3;
+let CG4;
+let CG5;
+let CG6;
+let CG7;
+let CG8;
+let CG9;
+let CG10;
+
+//VARIABLES FOR GALLERY PLACEHOLDERS (aka locked gallery) 
 let galleryPlaceholder;
 let galleryPlaceholder2;
 let galleryPlaceholder3;
@@ -41,19 +52,31 @@ let galleryPlaceholder4;
 let galleryPlaceholder5;
 let galleryPlaceholder6;
 
-//Gallery Unlock
+//Variables (if it is false, the gallery will not show the image until it is shown to be true passing a scene
 let CG1Unlock = false;
 let CG2Unlock = false;
 let CG3Unlock = false;
 let CG4Unlock = false;
 let CG5Unlock = false;
 let CG6Unlock = false;
+let CG7Unlock = false;
+let CG8Unlock = false;
+let CG9Unlock = false;
+let CG10Unlock = false;
 
 //Ending CGS
 let endCG1;
+let endCG2;
 let endCG3;
-
+let endCG4;
+let endCG5;
 let endCG6;
+let endCG7;
+let endCG8;
+let endCG9;
+let endCG10;
+let endCG11;
+
 let endCG62;
 
 let startText = "Start"
@@ -63,8 +86,6 @@ let creditText = "Credits"
 //VARIABLES
 let guardTalk = false;
 let vLikeBar = 0;
-let mobiusLikeBar = 0; //???
-let doctorLikeBar = 0;
 
 //PIANO
 let oscillator;
@@ -87,38 +108,55 @@ let vWorried;
 let mobiusSerious;
 
 let deltaSerious;
-let deltaSmile;
+
 let deltaShy;
 
 let guardNeutral;
 
 let furinaDream;
+let furinaSmile;
+
+let neuviletteNeutral;
 
 //BACKGROUNDS
 let backgroundNames = ["snowBG", "officeBG", "hallwayBG", "piano", "pianoBG1", "blackSquare", "roomBG", "experimentationBG", "transparent"];
 let backgrounds = {};
 
-// let spriteNames = ["doctorSerious", "doctorSmile"];
-// let characterSprites = {};
+//MUSIC
+let snowMusic;
+let lastMusic;
+let oldDoll;
+let doomedMusic;
 
 let currentScene = "intro";
 let currentDialog = 0;
 
 let textInput;
 let textInputBox;
-let dreamName = name;
-// let secretEnding = false;
+
+let secretEnding = false;
 
 /**
- * Description of preload
+ * Preloading all the images (sprites, CGS) and music to be used later in the game 
 */
 function preload() {
 
     titleScreen = loadImage('assets/images/title.png');
+    altMenu = loadImage('assets/images/altMenu.png');
     act1Arrow = loadImage('assets/images/act1Arrow.png');
     act2Arrow = loadImage('assets/images/act2Arrow.png');
     arrow = loadImage('assets/images/right-arrow.png');
+
     CG1 = loadImage('assets/images/CGS/CG1.png');
+    CG2 = loadImage('assets/images/EndCG1.png');
+    CG3 = loadImage('assets/images/CGS/CG3.png');
+    CG4 = loadImage('assets/images/CGS/CG4.png');
+    CG5 = loadImage('assets/images/CGS/CG5.png');
+    CG6 = loadImage('assets/images/CGS/CG6.png');
+    CG7 = loadImage('assets/images/CGS/CG7.png');
+    CG8 = loadImage('assets/images/CGS/CG8.png');
+    CG9 = loadImage('assets/images/CGS/CG9.png');
+    CG10 = loadImage('assets/images/CGS/CG10.png');
 
     galleryPlaceholder = loadImage('assets/images/galleryPlaceholder.png');
     galleryPlaceholder2 = loadImage('assets/images/galleryPlaceholder2.png');
@@ -128,8 +166,17 @@ function preload() {
     galleryPlaceholder6 = loadImage('assets/images/galleryPlaceholder6.png');
 
     endCG1 = loadImage('assets/images/EndCG1.png');
-    endCG3 = loadImage('assets/images/EndCG3.png');
-    endCG6 = loadImage('assets/images/ENDCGS/EndCG6-1.png');
+    endCG2 = loadImage('assets/images/ENDCGS/EndCG2.png');
+    endCG3 = loadImage('assets/images/ENDCGS/EndCG3.png');
+    endCG4 = loadImage('assets/images/ENDCGS/EndCG4.png');
+    endCG5 = loadImage('assets/images/ENDCGS/EndCG5.png');
+    endCG6 = loadImage('assets/images/ENDCGS/endCG6.png');
+    endCG7 = loadImage('assets/images/ENDCGS/endCG7.png');
+    endCG8 = loadImage('assets/images/ENDCGS/endCG8.png');
+    endCG9 = loadImage('assets/images/ENDCGS/endCG9.png');
+    endCG10 = loadImage('assets/images/ENDCGS/endCG10.png');
+    endCG11 = loadImage('assets/images/ENDCGS/endCG11.png');
+
     endCG62 = loadImage('assets/images/ENDCGS/EndCG6-2.png');
 
     doctorSerious = loadImage('assets/images/sprites/doctorSerious.png');
@@ -142,12 +189,20 @@ function preload() {
     mobiusSerious = loadImage('assets/images/sprites/mobiusSerious.png');
 
     deltaSerious = loadImage('assets/images/sprites/deltaSerious.png');
-    deltaSmile = loadImage('assets/images/sprites/deltaSmile.png');
     deltaShy = loadImage('assets/images/sprites/deltaShy.png');
 
     guardNeutral = loadImage('assets/images/sprites/guardNeutral.png');
 
     furinaDream = loadImage('assets/images/sprites/furinaDream.png');
+    furinaSmile = loadImage('assets/images/sprites/furinaSmile.png');
+
+    neuviletteNeutral = loadImage('assets/images/sprites/neuviletteNeutral.png');
+
+    snowMusic = loadSound('assets/sounds/Snowfall.mp3');
+    lastMusic = loadSound('assets/sounds/One Last Glance.mp3');
+    oldDoll = loadSound('assets/sounds/Old Doll.mp3');
+    doomedMusic = loadSound('assets/sounds/DOOMED.mp3');
+
 
     // snowBG = loadImage('assets/images/bgs/snow.jpeg');
 
@@ -158,6 +213,7 @@ function preload() {
 
 }
 
+//Variables for all the choices, these are so the choices can be shown on when the choices are supposed to appear. They are just lines so instead of inserting the text itself I just decided to make variables instead for easier finding.
 let choice1A = "Go back."
 let choice1B = "Push on."
 
@@ -205,13 +261,22 @@ let choice14B = "Check on V."
 let choice15A = "No, I'll stay."
 let choice15B = "Fine."
 
+let choice16A = "Nuh uh."
+let choice16B = "What do you want."
+
+let choice17A = "Okay."
+let choice17B = "No."
+
 /**
  * Description of setup
 */
 function setup() {
+    //creates canvas at 720p 
     createCanvas(1280, 720);
 
+    // makes it that the music/sound will only play when the user clicks the game itself
     userStartAudio();
+    //synth for the piano part of the game, it’s the sound that plays basically (the instrument)
     synth = new p5.PolySynth();
 
     //Creating a new oscillator
@@ -228,6 +293,7 @@ function setup() {
 function draw() {
     background(0);
 
+    //setting up the states of the game so when a certain state the game will change to said state 
     if (state === `title`) {
         title();
     }
@@ -239,7 +305,47 @@ function draw() {
     }
     else if (state === `gallery`) {
         gallery();
-        if (mouseIsPressed && mouseX >= 100 && mouseY >= 100 && mouseX <= 400 && mouseY <= 300 && CG1Unlock == true) {
+        //the mouse pressed makes it that if the mouse is around the area of the gallery on top of a CG and the CG is unlocked, it will call for “gallery images” which opens the CG you have selected into a bigger frame to be able to see it full screen
+        if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && CG1Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && CG2Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && CG3Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && CG4Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 370 && mouseX <= 805 && mouseY <= 570 && CG5Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 370 && mouseX <= 1205 && mouseY <= 570 && CG6Unlock == true) {
+            galleryImages();
+        }
+    } else if (state === `gallery2`) {
+        gallery2();
+        //this is the same as previously stated with the whole calling gallery images but instead working on page 2 of the gallery, a different function to call for different things 
+        if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && CG7Unlock == true) {
+            galleryImages2();
+        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && CG8Unlock == true) {
+            galleryImages2();
+        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && CG9Unlock == true) {
+            galleryImages2();
+        } else if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && CG10Unlock == true) {
+            galleryImages2();
+        }
+    }
+    else if (state === `gallery3`) {
+        gallery3();
+        //the mouse pressed makes it that if the mouse is around the area of the gallery on top of a CG and the CG is unlocked, it will call for “gallery images” which opens the CG you have selected into a bigger frame to be able to see it full screen
+        if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && CG1Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && CG2Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && CG3Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && CG4Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 370 && mouseX <= 805 && mouseY <= 570 && CG5Unlock == true) {
+            galleryImages();
+        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 370 && mouseX <= 1205 && mouseY <= 570 && CG6Unlock == true) {
             galleryImages();
         }
     }
@@ -252,23 +358,32 @@ function draw() {
 }
 
 function title() {
+    //the title screen display
+    //All it does is display the image I made for the title screen in the canvas definition
     push()
     imageMode(CORNER)
     image(titleScreen, 0, 0, 1280, 720);
     pop()
 }
 
+/**
+ * this function is specifically for when you press start and it displays the act buttons. These are all the display components.
+*/
 function actButtons() {
+    //calls the title function
     title()
     push()
     imageMode(CORNER)
     image(act1Arrow, 946, act1ArrowOriginalPos, 177, 20);
-    if (act2Available == false) {
+
+    //if act 2 is not available yet, the act 2 text will not appear in full opacity and be slightly greyed out (to show it’s not available) 
+    // however if act 2 is true (which the available marker is at a certain scene) it will make the text be full opacity aka white
+    if (act2Available === false) {
         push()
         tint(255, 100)
         image(act2Arrow, 946, act2ArrowOriginalPos, 177, 20);
         pop()
-    } else if (act2Available == true) {
+    } else if (act2Available === true) {
         push()
         tint(255, 255)
         image(act2Arrow, 946, act2ArrowOriginalPos, 177, 20);
@@ -276,31 +391,36 @@ function actButtons() {
     }
     pop()
 
-    if (actButtonsShow == false) {
+    //if the start button is pressed, then the act button would change from false to true. In this part is says, if the buttons are not being shown, move the text of the acts downwards gradually 
+    if (actButtonsShow === false) {
         act1ArrowOriginalPos = act1ArrowOriginalPos + 5
         act2ArrowOriginalPos = act2ArrowOriginalPos + 8
     }
 
-    if (actButtonsShow == true) {
+    //if it’s true however, it will stop at those specific positions 
+    if (actButtonsShow === true) {
         act1ArrowOriginalPos = 310
         act2ArrowOriginalPos = 350
     }
 
+    //which is what this code does. Telling that if the first act button is bigger than 310 or act two is bigger than 350 (y value) then the buttons that are being shown and sliding will stop
     if (act1ArrowOriginalPos > 310 || act2ArrowOriginalPos > 350) {
         actButtonsShow = true
     }
 }
-function gallery() {
-    rect(100, 100, 330, 200);
-    rect(500, 100, 330, 200);
-    rect(900, 100, 330, 200);
-    //second row
-    rect(100, 370, 330, 200);
-    rect(500, 370, 330, 200);
-    rect(900, 370, 330, 200);
 
+/**
+ * The gallery function, which is also a state, is broken in two parts (gallery2 being the other part)
+*/
+function gallery() {
     //back rectangle
     rect(70, 600, 150, 60);
+
+    push()
+    fill(255)
+    textSize(30)
+    text("CGS ... Page 1.", 90, 80)
+    pop()
 
     push()
     fill(255, 0, 0)
@@ -308,15 +428,29 @@ function gallery() {
     text("< BACK", 90, 640)
     pop()
 
+    //next rectangle
+    rect(1060, 600, 150, 60);
+
+    push()
+    fill(255, 0, 0)
+    textSize(30)
+    text("NEXT >", 1080, 640)
+    pop()
+
+    push()
+    fill(255, 0, 0)
+    rect(405, 570, 100, 80)
+    pop()
+
     //CG 1
     push()
     if (CG1Unlock == false) {
         imageMode(CORNER)
-        image(galleryPlaceholder, 100, 100, 330, 200);
+        image(galleryPlaceholder, 75, 100, 330, 200);
     }
     if (CG1Unlock == true) {
         imageMode(CORNER)
-        image(CG1, 100, 100, 330, 200);
+        image(CG1, 75, 100, 330, 200);
     }
     pop()
 
@@ -324,11 +458,11 @@ function gallery() {
     push()
     if (CG2Unlock == false) {
         imageMode(CORNER)
-        image(galleryPlaceholder6, 500, 100, 330, 200);
+        image(galleryPlaceholder6, 475, 100, 330, 200);
     }
     if (CG2Unlock == true) {
         imageMode(CORNER)
-        image(galleryPlaceholder, 100, 100, 330, 200);
+        image(CG2, 475, 100, 330, 200);
     }
     pop()
 
@@ -336,11 +470,11 @@ function gallery() {
     push()
     if (CG3Unlock == false) {
         imageMode(CORNER)
-        image(galleryPlaceholder4, 900, 100, 330, 200);
+        image(galleryPlaceholder4, 875, 100, 330, 200);
     }
     if (CG3Unlock == true) {
         imageMode(CORNER)
-        image(galleryPlaceholder, 100, 100, 330, 200);
+        image(CG3, 875, 100, 330, 200);
     }
     pop()
 
@@ -348,35 +482,183 @@ function gallery() {
     push()
     if (CG4Unlock == false) {
         imageMode(CORNER)
-        image(galleryPlaceholder3, 100, 370, 330, 200);
+        image(galleryPlaceholder3, 75, 370, 330, 200);
     }
-    if (CG5Unlock == true) {
+    if (CG4Unlock == true) {
         imageMode(CORNER)
-        image(galleryPlaceholder, 100, 100, 330, 200);
+        image(CG4, 75, 370, 330, 200);
     }
     pop()
 
     //CG 5
     push()
-    if (CG4Unlock == false) {
+    if (CG5Unlock == false) {
         imageMode(CORNER)
-        image(galleryPlaceholder5, 500, 370, 330, 200);
+        image(galleryPlaceholder5, 475, 370, 330, 200);
     }
     if (CG5Unlock == true) {
         imageMode(CORNER)
-        image(galleryPlaceholder, 100, 100, 330, 200);
+        image(CG5, 475, 370, 330, 200);
     }
     pop()
 
     //CG 6
     push()
-    if (CG4Unlock == false) {
+    if (CG6Unlock == false) {
         imageMode(CORNER)
-        image(galleryPlaceholder2, 900, 370, 330, 200);
+        image(galleryPlaceholder2, 875, 370, 330, 200);
     }
-    if (CG5Unlock == true) {
+    if (CG6Unlock == true) {
         imageMode(CORNER)
-        image(galleryPlaceholder, 100, 100, 330, 200);
+        image(CG6, 875, 370, 330, 200);
+    }
+    pop()
+}
+
+function gallery2() {
+    //back rectangle
+    rect(70, 600, 150, 60);
+
+    push()
+    fill(255)
+    textSize(30)
+    text("CGS ... Page 2.", 90, 80)
+    pop()
+
+    push()
+    fill(255, 0, 0)
+    textSize(30)
+    text("< BACK", 90, 640)
+    pop()
+
+    //next rectangle
+    rect(1060, 600, 150, 60);
+
+    push()
+    fill(255, 0, 0)
+    textSize(30)
+    text("NEXT >", 1080, 640)
+    pop()
+
+    //CG 1
+    push()
+    if (CG7Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder, 75, 100, 330, 200);
+    }
+    if (CG7Unlock == true) {
+        imageMode(CORNER)
+        image(CG7, 75, 100, 330, 200);
+    }
+    pop()
+
+    //CG 2
+    push()
+    if (CG8Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder6, 475, 100, 330, 200);
+    }
+    if (CG8Unlock == true) {
+        imageMode(CORNER)
+        image(CG8, 475, 100, 330, 200);
+    }
+    pop()
+
+    //CG 3
+    push()
+    if (CG9Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder4, 875, 100, 330, 200);
+    }
+    if (CG9Unlock == true) {
+        imageMode(CORNER)
+        image(CG9, 875, 100, 330, 200);
+    }
+    pop()
+
+    //CG 4
+    push()
+    if (CG10Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder3, 75, 370, 330, 200);
+    }
+    if (CG10Unlock == true) {
+        imageMode(CORNER)
+        image(CG10, 75, 370, 330, 200);
+    }
+    pop()
+}
+
+function gallery3() {
+    //back rectangle
+    rect(70, 600, 150, 60);
+
+    push()
+    fill(255)
+    textSize(30)
+    text("Ending Cards ... Page 1.", 90, 80)
+    pop()
+
+    push()
+    fill(255, 0, 0)
+    textSize(30)
+    text("< BACK", 90, 640)
+    pop()
+
+    //next rectangle
+    rect(1060, 600, 150, 60);
+
+    push()
+    fill(255, 0, 0)
+    textSize(30)
+    text("NEXT >", 1080, 640)
+    pop()
+
+    //CG 1
+    push()
+    if (CG7Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder, 75, 100, 330, 200);
+    }
+    if (CG7Unlock == true) {
+        imageMode(CORNER)
+        image(CG7, 75, 100, 330, 200);
+    }
+    pop()
+
+    //CG 2
+    push()
+    if (CG8Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder6, 475, 100, 330, 200);
+    }
+    if (CG8Unlock == true) {
+        imageMode(CORNER)
+        image(CG8, 475, 100, 330, 200);
+    }
+    pop()
+
+    //CG 3
+    push()
+    if (CG9Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder4, 875, 100, 330, 200);
+    }
+    if (CG9Unlock == true) {
+        imageMode(CORNER)
+        image(CG9, 875, 100, 330, 200);
+    }
+    pop()
+
+    //CG 4
+    push()
+    if (CG10Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder3, 75, 370, 330, 200);
+    }
+    if (CG10Unlock == true) {
+        imageMode(CORNER)
+        image(CG10, 75, 370, 330, 200);
     }
     pop()
 }
@@ -385,14 +667,59 @@ function galleryImageUnlock() {
     if (scene == 55 && CG1Unlock == false) {
         CG1Unlock = true;
     }
+
+    if (scene == 55 && CG2Unlock == false) {
+        CG2Unlock = true;
+    }
+
+    if (scene == 317 && CG3Unlock == false) {
+        CG3Unlock = true;
+    }
+
+    if (scene == 323 && CG4Unlock == false) {
+        CG4Unlock = true;
+    }
+
+    if (scene == 335 && CG5Unlock == false) {
+        CG5Unlock = true;
+    }
+
+    if (scene == 349 && CG6Unlock == false) {
+        CG6Unlock = true;
+    }
+
+    if ((scene == 384 || scene == 411) && CG7Unlock == false) {
+        CG7Unlock = true;
+    }
+
+    if (scene == 417 && CG8Unlock == false) {
+        CG8Unlock = true;
+    }
+
+    if (scene == 434 && CG9Unlock == false) {
+        CG9Unlock = true;
+    }
+
+    if (scene == 452 && CG10Unlock == false) {
+        CG10Unlock = true;
+    }
 }
 
 function credits() {
+    push()
+    imageMode(CORNER)
+    image(altMenu, 0, 0, 1280, 720);
+    pop()
+
+    push()
+    fill(255, 255, 255, 150)
     rect(500, 50, 500, 625);
+    pop()
+
     push();
     fill(0)
-    textSize(30)
-    text("Code: Me \n\n\nIllustrations: Myself \n\n\nUnexisting Music: I\n\n\n (I'll add full credits when\n I'm done in true animator\n fashion)", 550, 100)
+    textSize(20)
+    text("CREDITS!!!\n\n\nCode: Me \n\nllustrations: Me!!! Also background from Adobe \nStock cuz I am not drawing backgrounds do I \nlook like I understand perspective.\nAlso character inspirations to my homie miHoYo \n\nUnexisting Music: Snowfall by Scott Buckley\nOne Last Glance and DOOMED by Invadable \nHarmony\nOld Doll by Bluerra-sai\n\n\n (I'll add full credits when\n I'm done in true animator\n fashion)", 550, 100)
     pop();
 
 
@@ -414,13 +741,15 @@ function simulation() {
     endingGraphics();
     overlayGraphic();
     specialText();
-    nameInput()
+    if (scene === 275) {
+        nameInput();
+    }
 
     if (scene == 153) {
         act2Available = true;
     }
 
-    galleryImageUnlock()
+    galleryImageUnlock();
 }
 
 
@@ -780,6 +1109,42 @@ function choices() {
         text(choice15B, width / 2, 427)
         pop();
     }
+
+    //CHOICE 16
+    if (scene == 424) {
+        push();
+        fill(255, 255, 255, 200);
+        rectMode(CENTER);
+        strokeWeight(2)
+        rect(width / 2, 297, 350, 55);
+        rect(width / 2, 417, 350, 55);
+        pop();
+
+        push();
+        textAlign(CENTER)
+        textSize(30)
+        text(choice16A, width / 2, 307)
+        text(choice16B, width / 2, 427)
+        pop();
+    }
+
+    //CHOICE 17
+    if (scene == 444) {
+        push();
+        fill(255, 255, 255, 200);
+        rectMode(CENTER);
+        strokeWeight(2)
+        rect(width / 2, 297, 350, 55);
+        rect(width / 2, 417, 350, 55);
+        pop();
+
+        push();
+        textAlign(CENTER)
+        textSize(30)
+        text(choice17A, width / 2, 307)
+        text(choice17B, width / 2, 427)
+        pop();
+    }
 }
 
 function sprites() {
@@ -900,16 +1265,25 @@ function sprites() {
         image(furinaDream, width / 2, 420, 369, 609);
         pop();
     }
+
+    //FURINA
+    if (scene >= 439 && scene <= 463) {
+        push();
+        imageMode(CENTER);
+        image(furinaSmile, 426, 400, 425, 739);
+        pop();
+    }
+
+    //NEUVILETTE
+    if (scene >= 439 && scene <= 463) {
+        push();
+        imageMode(CENTER);
+        image(neuviletteNeutral, 852, 400, 425, 739);
+        pop();
+    }
 }
 
 function backgroundsForScenes() {
-    // if (scene >= 0) {
-    //     push();
-    //     imageMode(CORNER);
-    //     image(snowBG, 0, 0, 2200, 739);
-    //     pop();
-    // }
-
     let bgName = scenes[scene].bg;
     background(backgrounds[bgName]);
 
@@ -921,12 +1295,19 @@ function backgroundsForScenes() {
 function mousePressed() {
     allMenuButtons()
     nameInput()
-    //backToMainMenu()
 
-
-    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene !== 10 && scene !== 16 && scene !== 25 && scene !== 38 && scene !== 47 && scene !== 52 && scene !== 77 && scene !== 82 && scene !== 98 && scene !== 114 && scene !== 122 && scene !== 127 && scene !== 156 && scene !== 192 && scene !== 200 && scene !== 207 && scene !== 256 && scene !== 271 && scene !== 297 && scene !== 332 && scene !== 339 && scene !== 344 && scene !== 348 && scene !== 359 && scene !== 371) {
+    if (state === `simulation` && mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene !== 10 && scene !== 16 && scene !== 25 && scene !== 38 && scene !== 47 && scene !== 52 && scene !== 77 && scene !== 82 && scene !== 98 && scene !== 114 && scene !== 122 && scene !== 127 && scene !== 156 && scene !== 192 && scene !== 200 && scene !== 207 && scene !== 256 && scene !== 271 && scene !== 275 && scene !== 297 && scene !== 308 && scene !== 332 && scene !== 339 && scene !== 344 && scene !== 348 && scene !== 359 && scene !== 371 && scene !== 392 && scene !== 406 && scene !== 424 && scene !== 426 && scene !== 432 && scene !== 444 && scene !== 459 && scene !== 463) {
         scene += 1;
         console.log(scene)
+
+        music();
+    }
+
+    //SECRET ENDING
+    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 308 && secretEnding == true) {
+        scene = 433;
+    } else if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 308 && secretEnding == false) {
+        scene++;
     }
 
     //CHOICE 1
@@ -992,7 +1373,6 @@ function mousePressed() {
     //CHOICE 5A
     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 98) {
         scene = 99;
-        doctorLikeBar++
         vLikeBar++
     }
 
@@ -1048,7 +1428,7 @@ function mousePressed() {
     //CHOICE 9
     //CHOICE 9A
     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 207) {
-        scene = 207;
+        scene = 208;
     }
 
     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 214) {
@@ -1102,10 +1482,10 @@ function mousePressed() {
         scene = 349;
     }
 
-    //CHOICE 12C
-    // if (mouseX >= 465 && mouseX <= 815 && mouseY >= 390 && mouseY <= 444 && scene == 332) {
-    //     scene = 121;
-    // }
+    // CHOICE 12C
+    if (mouseX >= 465 && mouseX <= 815 && mouseY >= 390 && mouseY <= 444 && scene == 332) {
+        scene = 408;
+    }
 
     //CHOICE 13A
     if (mouseX >= 465 && mouseX <= 815 && mouseY >= 273 && mouseY <= 327 && scene == 339 && vLikeBar >= 3) {
@@ -1133,36 +1513,81 @@ function mousePressed() {
     }
 
     //CHOICE 15B
-    // if (mouseX >= 465 && mouseX <= 815 && mouseY >= 390 && mouseY <= 444 && scene == 371) {
-    //     scene = 335;
-    // }
+    if (mouseX >= 465 && mouseX <= 815 && mouseY >= 390 && mouseY <= 444 && scene == 371) {
+        scene = 393;
+    }
+
+    //CHOICE 16A
+    if (mouseX >= 465 && mouseX <= 815 && mouseY >= 273 && mouseY <= 327 && scene == 424) {
+        scene = 425;
+    }
+
+    if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 427) {
+        scene = 428;
+    }
+
+    //CHOICE 16B
+    if (mouseX >= 465 && mouseX <= 815 && mouseY >= 390 && mouseY <= 444 && scene == 424) {
+        scene = 427;
+    }
+
+    //CHOICE 17A
+    if (mouseX >= 465 && mouseX <= 815 && mouseY >= 273 && mouseY <= 327 && scene == 444) {
+        scene = 461;
+    }
+
+    //CHOICE 17B
+    if (mouseX >= 465 && mouseX <= 815 && mouseY >= 390 && mouseY <= 444 && scene == 444) {
+        scene = 445;
+    }
 }
 
 function nameInput() {
 
-    // push()
-    // fill(255)
-    // rectMode(CENTER)
-    // rect(width/2,height/2,300,100)
-    // pop()
+    if (scene === 275) {
+        push()
+        fill(255)
+        rectMode(CENTER)
+        rect(width / 2, 250, 500, 100)
+        fill(0)
+        textAlign(CENTER)
+        textSize(25)
+        text("write your answer... then press enter...\n (lowercase)", width / 2, 250)
+        pop()
+        push()
+        fill(255);
+        textSize(30);
+        textAlign(CENTER)
+        text(content, width / 2, height / 2);
+        pop()
+    }
+    console.log(secretEnding)
 
-    // if (content === nameContent) {
-
-    // }
+    if (scene === 275) {
+        if (content === nameContent) {
+            secretEnding = true;
+        } if (content !== nameContent) {
+            secretEnding = false;
+        }
+    }
 }
 
+function keyTyped() {
+    if (scene === 275) {
+        content += key;
 
+        if (key === 'Enter') {
+            scene++
+        }
+    }
 
-// function enterText() {
-//     if (scene == 275) {
-//         if (textInput.value() == dreamName) {
-//             //go to the next scene
-//             secretEnding = true;
-//         } else {
-//             //go to the next scene
-//         }
-//     }
-// }
+}
+
+function keyReleased() {
+    if (keyCode == BACKSPACE) {
+        content = content.substring(0, content.length - 1);
+    }
+}
 
 function allMenuButtons() {
     // if (state === `title` && mouseX >= 926 && mouseY >= 237 && mouseX <= 1193 && mouseY <= 287) {
@@ -1210,6 +1635,18 @@ function allMenuButtons() {
         state = `title`;
     }
 
+    if (state === `gallery2` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
+        state = `gallery`;
+    }
+
+    if (state === `gallery` && mouseX >= 1060 && mouseY >= 600 && mouseX <= 1210 && mouseY <= 660) {
+        state = `gallery2`;
+    }
+
+    if (state === `gallery2` && mouseX >= 1060 && mouseY >= 600 && mouseX <= 1210 && mouseY <= 660) {
+        state = `gallery3`;
+    }
+
     if (state === `credits` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
         state = `title`;
     }
@@ -1225,6 +1662,14 @@ function allMenuButtons() {
         act1ArrowOriginalPos = 257;
         act2ArrowOriginalPos = 257;
         actButtonsShow = false;
+        secretEnding = false
+        content = ""
+        vLikeBar = 0
+
+        doomedMusic.setVolume(0, 2);
+        oldDoll.setVolume(0, 2);
+        snowMusic.setVolume(0, 2);
+        lastMusic.setVolume(0, 2);
     }
 
     if (state === `menu` && mouseX >= 730 && mouseY >= 478 && mouseX <= 770 && mouseY <= 500) {
@@ -1232,41 +1677,101 @@ function allMenuButtons() {
     }
 }
 
-// function mousePressed() {
-//      allMenuButtons();
-//     let line = script[currentScene][currentDialog];
-
-//     if (line.type === "speech") {
-//         currentDialog++;
-//     }
-//     else if (line.type === "choice") {
-//         // Work out which choice they clicked!
-//         for (let i = 0; i < line.choices.length; i++) {
-//             let choice = line.choices[i];
-//             if (mouseX > choice.button.x &&
-//                 mouseX < choice.button.x + choice.button.w &&
-//                 mouseY > choice.button.y &&
-//                 mouseY < choice.button.y + choice.button.h) {
-//                 // It was clicked
-//                 currentScene = choice.nextScene;
-//                 currentDialog = 0;
-//             }
-//         }
-//     }
-
-// }
 function galleryImages() {
-    push()
-    imageMode(CORNER)
-    image(CG1, 0, 0, 1280, 720);
-    pop()
+    if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && CG1Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG1, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && CG2Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG2, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && CG3Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG3, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && CG4Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG4, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 475 && mouseY >= 370 && mouseX <= 805 && mouseY <= 570 && CG5Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG5, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 875 && mouseY >= 370 && mouseX <= 1205 && mouseY <= 570 && CG6Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG6, 0, 0, 1280, 720);
+        pop()
+    }
+
+}
+
+function galleryImages2() {
+    if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && CG7Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG7, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && CG8Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG8, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && CG9Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG9, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && CG10Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG10, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 475 && mouseY >= 370 && mouseX <= 805 && mouseY <= 570 && CG5Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG5, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 875 && mouseY >= 370 && mouseX <= 1205 && mouseY <= 570 && CG6Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(CG6, 0, 0, 1280, 720);
+        pop()
+    }
+
 }
 
 function overlayGraphic() {
     if (scene == 384) {
         push()
         imageMode(CORNER);
-        image(endCG6, 0, 0, 1280, 720);
+        image(CG7, 0, 0, 1280, 720);
         pop()
     }
 }
@@ -1279,15 +1784,43 @@ function cinematicGraphics() {
         pop()
     }
 
-    if (scene >= 384) {
+    if ((scene >= 317 && scene <= 323) || (scene >= 333 && scene <= 334)) {
         push()
         imageMode(CORNER);
-        image(endCG6, 0, 0, 1280, 720);
+        image(CG3, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (scene >= 323 && scene <= 332) {
+        push()
+        imageMode(CORNER);
+        image(CG4, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (scene >= 335 && scene <= 347) {
+        push()
+        imageMode(CORNER);
+        image(CG5, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (scene >= 349 && scene <= 351) {
+        push()
+        imageMode(CORNER);
+        image(CG6, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if ((scene >= 384 && scene <= 392) || (scene >= 411 && scene <= 416)) {
+        push()
+        imageMode(CORNER);
+        image(CG7, 0, 0, 1280, 720);
         pop()
     }
 
     //DELTA OVERLAY SPRITE
-    if (scene >= 385) {
+    if (scene >= 385 && scene <= 392) {
         push();
         imageMode(CENTER);
         image(deltaSerious, width / 2, 400, 425, 739);
@@ -1300,77 +1833,133 @@ function cinematicGraphics() {
         image(endCG62, 0, 0, 1280, 720);
         pop()
     }
+
+    if (scene >= 417 && scene <= 432) {
+        push()
+        imageMode(CORNER);
+        image(CG8, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (scene >= 434 && scene <= 438) {
+        push()
+        imageMode(CORNER);
+        image(CG9, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (scene >= 452 && scene <= 459) {
+        push()
+        imageMode(CORNER);
+        image(CG10, 0, 0, 1280, 720);
+        pop()
+    }
 }
 
 function endingGraphics() {
 
+    //ENDING 1
     if (scene == 16) {
         push()
         imageMode(CORNER);
         image(endCG1, 0, 0, 1280, 720);
-        fill(255, 0, 0)
-        textSize(40)
-        text("END 1 - Honestly, \nmaybe France isn’t so bad.", 500, 450)
         pop()
 
         backToMainMenu()
     }
 
+    //ENDING 2
     if (scene == 47) {
         push()
         imageMode(CORNER);
-        image(endCG1, 0, 0, 1280, 720);
-        fill(255, 0, 0)
-        textSize(40)
-        text("END 2: Maybe \nyou should trust your gut feeling more.", 500, 450)
+        image(endCG2, 0, 0, 1280, 720);
         pop()
 
         backToMainMenu()
     }
 
+    //ENDING 3
     if (scene == 127) {
         push()
         imageMode(CORNER);
         image(endCG3, 0, 0, 1280, 720);
-        fill(255, 0, 0)
-        textSize(40)
-        text("END 3: Stuck as a newfound puppet (name pending).", 500, 450)
         pop()
 
         backToMainMenu()
     }
 
+    //ENDING 4
     if (scene == 348) {
         push()
         imageMode(CORNER);
-        image(endCG1, 0, 0, 1280, 720);
-        fill(255, 0, 0)
-        textSize(40)
-        text("END 4: Escaped the lab thanks to V LOL.", 500, 450)
+        image(endCG4, 0, 0, 1280, 720);
         pop()
 
         backToMainMenu()
     }
 
+    //ENDING 5
     if (scene == 344) {
         push()
         imageMode(CORNER);
-        image(endCG1, 0, 0, 1280, 720);
-        fill(255, 0, 0)
-        textSize(40)
-        text("END 5: Escaped the lab WITH V YIPPEE.", 500, 450)
+        image(endCG5, 0, 0, 1280, 720);
         pop()
 
         backToMainMenu()
     }
 
+    //ENDING 6
     if (scene == 392) {
         push()
         imageMode(CORNER);
-        image(endCG62, 0, 0, 1280, 720);
-        fill(255, 0, 0)
-        textSize(40)
-        text("END 6: YIPPEEE YOPPIEEEE", 500, 450)
+        image(endCG6, 0, 0, 1280, 720);
+
+        backToMainMenu()
+    }
+
+    //ENDING 7
+    if (scene == 406) {
+        push()
+        imageMode(CORNER);
+        image(endCG7, 0, 0, 1280, 720);
+
+        backToMainMenu()
+    }
+
+    //ENDING 8
+    if (scene == 426) {
+        push()
+        imageMode(CORNER);
+        image(endCG8, 0, 0, 1280, 720);
+
+        backToMainMenu()
+    }
+
+    //ENDING 9
+    if (scene == 432) {
+        push()
+        imageMode(CORNER);
+        image(endCG9, 0, 0, 1280, 720);
+        pop()
+
+        backToMainMenu()
+    }
+
+    //ENDING 10
+    if (scene == 459) {
+        push()
+        imageMode(CORNER);
+        image(endCG10, 0, 0, 1280, 720);
+        pop()
+
+        backToMainMenu()
+    }
+
+    //ENDING 11
+    if (scene == 463) {
+        push()
+        imageMode(CORNER);
+        image(endCG11, 0, 0, 1280, 720);
         pop()
 
         backToMainMenu()
@@ -1379,20 +1968,28 @@ function endingGraphics() {
 
 function backToMainMenu() {
     push()
-    fill(255)
+    fill(255, 255, 255, 200)
     strokeWeight(3)
-    rect(600, 200, 300, 100)
+    rect(80, 550, 300, 100)
     fill(0)
     textSize(30)
-    text("Replay?", 700, 260)
+    text("Replay?", 180, 610)
     pop()
 
-    if (mouseX >= 600 && mouseY >= 200 && mouseX <= 900 && mouseY <= 300 && mouseIsPressed) {
+    if (mouseX >= 80 && mouseY >= 550 && mouseX <= 380 && mouseY <= 650 && mouseIsPressed) {
         state = `title`;
         scene = 0;
         act1ArrowOriginalPos = 257;
         act2ArrowOriginalPos = 257;
         actButtonsShow = false;
+        secretEnding = false;
+        content = "";
+        vLikeBar = 0;
+
+        doomedMusic.setVolume(0, 2);
+        oldDoll.setVolume(0, 2);
+        snowMusic.setVolume(0, 2);
+        lastMusic.setVolume(0, 2);
     }
 }
 
@@ -1417,7 +2014,7 @@ function keyPressed() {
     }
 
     if (scene == 192) {
-        
+
         playNextNote()
         endPianoTimer++;
         console.log(endPianoTimer)
@@ -1450,5 +2047,40 @@ function playNextNote() {
     if (currentNote === notes.length) {
         currentNote = 0;
     }
+}
+
+function music() {
+    if (scene === 4) {
+        snowMusic.play();
+        snowMusic.loop();
+        snowMusic.setVolume(0);
+        snowMusic.setVolume(1, 2);
+    }
+
+    if (scene === 305) {
+        doomedMusic.play();
+        doomedMusic.loop();
+        doomedMusic.setVolume(0);
+        doomedMusic.setVolume(1, 2);
+    }
+
+    if (scene === 317) {
+        doomedMusic.setVolume(0, 2);
+
+        lastMusic.play();
+        lastMusic.loop();
+        lastMusic.setVolume(0);
+        lastMusic.setVolume(1, 2);
+    }
+
+    if ((scene === 384) || (scene === 411)) {
+        lastMusic.setVolume(0, 2);
+
+        oldDoll.play();
+        oldDoll.loop();
+        oldDoll.setVolume(0);
+        oldDoll.setVolume(1, 2);
+    }
+
 }
 

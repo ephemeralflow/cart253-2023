@@ -641,11 +641,11 @@ let scenes = [{
     txt: "...",
     bg: "piano",
 }, {
-    name: "???",
+    name: "??na",
     txt: "*sigh* You’re terrible at this!",
     bg: "pianoBG1",
 }, {
-    name: " ",
+    name: "???",
     txt: "It’s ok, we can try again…",
     bg: "pianoBG1",
 }, {
@@ -666,7 +666,7 @@ let scenes = [{
     bg: "roomBG",
 }, {
     name: " ",
-    txt: "The appearance was eerily similar to that of the doctor, yet not really? Perhaps the two of them were siblings?",
+    txt: "The appearance was eerily similar to that of The Doctor, yet not really? Perhaps the two of them were siblings?",
     bg: "roomBG",
 }, {
     name: "???", //165
@@ -783,7 +783,7 @@ let scenes = [{
 
 
 {
-    name: "???", //191
+    name: "fu??", //191
     txt: "Okay, how about we try this again.",
     bg: "piano",
 }, {
@@ -972,7 +972,7 @@ let scenes = [{
     bg: "transparent",
 }, {
     name: " ",
-    txt: "You must have fallen asleep or completely zooned out after awhile since you woke up with the doctor right in front of you, in the room where you were first experimented on",
+    txt: "You must have fallen asleep or completely zooned out after awhile since you woke up with The Doctor right in front of you, in the room where you were first experimented on",
     bg: "experimentationBG",
 }, {
     name: "Doctor", //239
@@ -1115,7 +1115,7 @@ let scenes = [{
     txt: "Remember what I told you.",
     bg: "piano",
 }, {
-    name: "???", //272
+    name: "?ri?", //272
     txt: "You're getting better!",
     bg: "pianoBG1",
 }, {
@@ -1602,6 +1602,290 @@ let scenes = [{
 }, {
     name: " ",
     txt: "END 6; idk",
+    bg: "hallwayBG",
+}, {
+    name: "Delta", //393
+    txt: "Good.",
+    bg: "hallwayBG",
+}, {
+    name: "Delta",
+    txt: "Now scram before.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "You stood in place awkwardly before Delta pointed in the opposite direction.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "After awhile on just standing there, he just grabbed something from his jacket and instead pulled out his own ID.",
+    bg: "hallwayBG",
+}, {
+    name: "Delta",
+    txt: "You won't be able to pass off me OBVIOUSLY but you can get through higher security areas that need an ID to go through.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "You grabbed the ID from Delta, it looks like there *was* a nice bone in his body as you",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Turning around, you gave a brief wave at him. This would be in theory the last time you would see him after all.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Delta opened his mouth, as if he was going to say something. Only for him to close it shortly after with furrowed brows. Deciding instead to turn away from you and start marching away from you.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "With that you choose to leave as well, with Delta's ID, you could practically go anywhere in the lab.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "And that you did, finding the exit that is only used by staff, which coincidentally is also the one that has no guards guarding it.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Earlier, you also had found the storage for outside clothing used by staff and you gladly took some of the stuff to survive the outside cold.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "But... while walking out, suddenly you worried for the others. V, Mobius, Delta... The Doctor who apparently got... neutralized.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Was it, the right choice to escape when you did? Or would it have been better to find out the truth?",
+    bg: "hallwayBG",
+}, {
+    name: " ", //407
+    txt: "END 7: Escaped, but at what cost ngl",
+    bg: "hallwayBG",
+}, {
+    name: " ", //408
+    txt: "Not exactly knowing what to do, and wanting to find out the truth. You decide to walk away from the both of them.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "This was the perfect moment to run away from the lab, finally escape from the contract you were stuck in.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "But well, now you were curious about what V saw, call that morbid curiousity.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "You made your way past V in the direction of the lab you knew all too well. In the way of The Doctor.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Inside, you saw what you heard you would see.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "There, on the floor, lifeless, was The Doctor.",
+    bg: "hallwayBG",
+}, {
+    name: "You",
+    txt: "Oh boy.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Looking around you really didn't know what to expect or do. It's... a dead body alright.",
+    bg: "hallwayBG",
+}, {
+    name: "???",
+    txt: "My my... and what do we have here.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "You turned around to see who was the one behind you.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "... Does half of the staff just look the same or what. Or maybe you were just thinking that because of the blue hair that just looked the same as the man who was dead right beside you.",
+    bg: "hallwayBG",
+}, {
+    name: "You",
+    txt: "And who are you supposed to be.",
+    bg: "hallwayBG",
+}, {
+    name: "???",
+    txt: "I'm surprised you don't already know. They call me... The Doctor.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "You blinked stupified at him. Wasn't the one on the floor The Doctor? Are they both The Doctor?",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Seeing your expression, the man only sighed, apparently being able to practically read your mind.",
+    bg: "hallwayBG",
+}, {
+    name: "???",
+    txt: "... I don't have the time to argue with you but since I want to actually get something out of you, feel free to call me... Prime.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Prime... Prime what. Not like you really cared..",
+    bg: "hallwayBG",
+}, {
+    name: "Prime", //425
+    txt: "I've heard of you. As well as the accomplishments of my other segments have done on you. Consider me impressed.",
+    bg: "hallwayBG",
+}, {
+    name: "Prime", //426
+    txt: "???",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: " ",
+    bg: "hallwayBG",
+}, {
+    name: "Prime", //428
+    txt: "What I want from you shouldn't concern you.",
+    bg: "hallwayBG",
+}, {
+    name: "Prime", //429
+    txt: "In any case, it's interesting how you hold no reaction in regards to seeing a dead body. How interesting.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "You didn't know why you held no reaction. It was a long time ago that you had made peace with how foreign your body felt to itself.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "At this point, you weren't surprised when anything that wasn't normal before coming here would happen.",
+    bg: "hallwayBG",
+}, {
+    name: "Prime",
+    txt: "How about I give you an offer. Something you are sure to not be able to resist.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "END 8: meeting the OG YASSS PINATA PINATA",
+    bg: "hallwayBG",
+}, {
+    name: "???", // 434? FROM 306 (OR MAYBE 307 BECAUSE OF THE LIKE-) TO WHATEVER THIS NUMBER IS
+    txt: "WHERE ARE THEY!",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Without much time to wonder what was that foreign voice, Delta got immediately waterboarded.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Looking at him, you only saw a now unconscious Delta because of his impact with the wall, that must have hurt.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "So you looked back in front of you. An open space between the hallways now occupied by multiple unconscious doctors and-",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Wait isn't that the lady from your dreams? Furina?!",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "It wasn't long before she saw you, her face illuminating immediately.",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "You're alive!",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "You remember me right, I'm Furina, this is Neuvilette.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "Her voice held a tinge of worry, nervous that you would have forgotten her, forgotten the time you had spent together..",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "You vanished one day... I was worried sick... I turned France upside down for you but no dice.",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "I had to swipe low... so low just to find out that you somehow got here...",
+    bg: "hallwayBG",
+}, {
+    name: "Furina", //445
+    txt: "I might have made an enemy of this country, but I don't care. Let's... Let's go home...",
+    bg: "hallwayBG",
+}, {
+    name: "Furina", //worried
+    txt: "What..?",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "Why not..?",
+    bg: "hallwayBG",
+}, {
+    name: "You",
+    txt: "I don't feel like it.",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "oh no you've been stockholm syndrome'd",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "Neuvilette.. what do I do???",
+    bg: "hallwayBG",
+}, {
+    name: "Neuvilette",
+    txt: "I'm not exactly sure what we *can* do.",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "You looked over at the bodies that were on the floor, completely soaked. You didn't recognize most of them, but you did recognize Mobius. You hope she will actually come back to consciousness soon.",
+    bg: "hallwayBG",
+}, {
+    name: "You",
+    txt: "Um I miss my homie Delta you outright killed him when you waterjetted him.",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "... Who????",
+    bg: "hallwayBG",
+}, {
+    name: "You",
+    txt: "He was a lil' weird and eccentric (and a murderer probably idk) but he offered to help me walk earlier so now I feel bad that he just got watered hardcore.",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "Oh... um...",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "So what do you want to do..?",
+    bg: "hallwayBG",
+}, {
+    name: " ",
+    txt: "You shrugged at Furina.",
+    bg: "hallwayBG",
+}, {
+    name: "You",
+    txt: "Idk.",
+    bg: "hallwayBG",
+}, {
+    name: " ", //460
+    txt: "END 9: why tho",
+    bg: "hallwayBG",
+}, {
+    name: " ", //461
+    txt: "Furina smiled lightly, it was almost as if she was tearing up just because of how relieved she felt.",
+    bg: "hallwayBG",
+}, {
+    name: "Furina",
+    txt: "Great! I knew you would say yes! Neuvilette, lead the way.",
+    bg: "hallwayBG",
+}, {
+    name: "Neuvilette",
+    txt: "*sigh* Very well, Lady Furina.",
+    bg: "hallwayBG",
+}, {
+    name: " ", //464
+    txt: "END 10",
     bg: "hallwayBG",
 }
 /*, {
