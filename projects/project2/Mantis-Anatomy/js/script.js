@@ -7,7 +7,7 @@
 "use strict";
 
 //CURRENT STATE + SCENE
-let state = `gallery`
+let state = `credits`
 let scene = 300;
 
 //variables for the name and the text they dau
@@ -21,6 +21,7 @@ let nameContent = "furina";
 
 //TITLE SCREEN
 let titleScreen;
+let galleryBG;
 let altMenu;
 let act1Arrow;
 let act2Arrow;
@@ -64,6 +65,19 @@ let CG8Unlock = false;
 let CG9Unlock = false;
 let CG10Unlock = false;
 
+//Similar variables from the ones right before only that these are for the ending CGs instead
+let endCG1Unlock = false;
+let endCG2Unlock = false;
+let endCG3Unlock = false;
+let endCG4Unlock = false;
+let endCG5Unlock = false;
+let endCG6Unlock = false;
+let endCG7Unlock = false;
+let endCG8Unlock = false;
+let endCG9Unlock = false;
+let endCG10Unlock = false;
+let endCG11Unlock = false;
+
 //Ending CGS
 let endCG1;
 let endCG2;
@@ -76,8 +90,6 @@ let endCG8;
 let endCG9;
 let endCG10;
 let endCG11;
-
-let endCG62;
 
 let startText = "Start"
 let galleryText = "Gallery"
@@ -108,7 +120,6 @@ let vWorried;
 let mobiusSerious;
 
 let deltaSerious;
-
 let deltaShy;
 
 let guardNeutral;
@@ -117,6 +128,10 @@ let furinaDream;
 let furinaSmile;
 
 let neuviletteNeutral;
+
+//Credit images
+let laCreatura;
+let clown;
 
 //BACKGROUNDS
 let backgroundNames = ["snowBG", "officeBG", "hallwayBG", "piano", "pianoBG1", "blackSquare", "roomBG", "experimentationBG", "transparent"];
@@ -127,13 +142,10 @@ let snowMusic;
 let lastMusic;
 let oldDoll;
 let doomedMusic;
+let roomMusic;
+let officeMusic;
 
-let currentScene = "intro";
-let currentDialog = 0;
-
-let textInput;
-let textInputBox;
-
+//Variable to unlock the secret ending, false means not unlocked/
 let secretEnding = false;
 
 /**
@@ -142,13 +154,14 @@ let secretEnding = false;
 function preload() {
 
     titleScreen = loadImage('assets/images/title.png');
+    galleryBG = loadImage('assets/images/gallery.png');
     altMenu = loadImage('assets/images/altMenu.png');
     act1Arrow = loadImage('assets/images/act1Arrow.png');
     act2Arrow = loadImage('assets/images/act2Arrow.png');
     arrow = loadImage('assets/images/right-arrow.png');
 
     CG1 = loadImage('assets/images/CGS/CG1.png');
-    CG2 = loadImage('assets/images/EndCG1.png');
+    CG2 = loadImage('assets/images/CGS/CG2.png');
     CG3 = loadImage('assets/images/CGS/CG3.png');
     CG4 = loadImage('assets/images/CGS/CG4.png');
     CG5 = loadImage('assets/images/CGS/CG5.png');
@@ -177,8 +190,6 @@ function preload() {
     endCG10 = loadImage('assets/images/ENDCGS/endCG10.png');
     endCG11 = loadImage('assets/images/ENDCGS/endCG11.png');
 
-    endCG62 = loadImage('assets/images/ENDCGS/EndCG6-2.png');
-
     doctorSerious = loadImage('assets/images/sprites/doctorSerious.png');
     doctorSmile = loadImage('assets/images/sprites/doctorSmile.png');
     doctorGrin = loadImage('assets/images/sprites/doctorGrin.png');
@@ -198,14 +209,19 @@ function preload() {
 
     neuviletteNeutral = loadImage('assets/images/sprites/neuviletteNeutral.png');
 
+    clown = loadImage('assets/images/clown.png');
+    laCreatura = loadImage('assets/images/laCreatura.png');
+
     snowMusic = loadSound('assets/sounds/Snowfall.mp3');
     lastMusic = loadSound('assets/sounds/One Last Glance.mp3');
     oldDoll = loadSound('assets/sounds/Old Doll.mp3');
     doomedMusic = loadSound('assets/sounds/DOOMED.mp3');
+    roomMusic = loadSound('assets/sounds/room.mp3');
+    officeMusic = loadSound('assets/sounds/Detective Caution.mp3');
 
 
-    // snowBG = loadImage('assets/images/bgs/snow.jpeg');
 
+    //Array made to load all the background names. It's basically saying a whole, the name that is used in the actual script, put it in the [] and then load the file according to the name in the array.
     for (let i = 0; i < backgroundNames.length; i++) {
         let backgroundName = backgroundNames[i];
         backgrounds[backgroundName] = loadImage(`assets/images/bgs/${backgroundName}.png`);
@@ -268,7 +284,7 @@ let choice17A = "Okay."
 let choice17B = "No."
 
 /**
- * Description of setup
+ * Creates the canvas + loads the oscillator to be used on the piano sections later on
 */
 function setup() {
     //creates canvas at 720p 
@@ -288,7 +304,7 @@ function setup() {
 
 
 /**
- * Description of draw()
+ * All the states will get mentioned in here
 */
 function draw() {
     background(0);
@@ -334,19 +350,34 @@ function draw() {
     }
     else if (state === `gallery3`) {
         gallery3();
-        //the mouse pressed makes it that if the mouse is around the area of the gallery on top of a CG and the CG is unlocked, it will call for “gallery images” which opens the CG you have selected into a bigger frame to be able to see it full screen
-        if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && CG1Unlock == true) {
-            galleryImages();
-        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && CG2Unlock == true) {
-            galleryImages();
-        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && CG3Unlock == true) {
-            galleryImages();
-        } else if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && CG4Unlock == true) {
-            galleryImages();
-        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 370 && mouseX <= 805 && mouseY <= 570 && CG5Unlock == true) {
-            galleryImages();
-        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 370 && mouseX <= 1205 && mouseY <= 570 && CG6Unlock == true) {
-            galleryImages();
+        //same as gallery page 1 but for gallery page 3
+        if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && endCG1Unlock == true) {
+            galleryImages3();
+        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && endCG2Unlock == true) {
+            galleryImages3();
+        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && endCG3Unlock == true) {
+            galleryImages3();
+        } else if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && endCG4Unlock == true) {
+            galleryImages3();
+        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 370 && mouseX <= 805 && mouseY <= 570 && endCG5Unlock == true) {
+            galleryImages3();
+        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 370 && mouseX <= 1205 && mouseY <= 570 && endCG6Unlock == true) {
+            galleryImages3();
+        }
+    }
+    else if (state === `gallery4`) {
+        gallery4();
+        //same as gallery page 1 but for gallery page 4
+        if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && endCG7Unlock == true) {
+            galleryImages4();
+        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && endCG8Unlock == true) {
+            galleryImages4();
+        } else if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && endCG9Unlock == true) {
+            galleryImages4();
+        } else if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && endCG10Unlock == true) {
+            galleryImages4();
+        } else if (mouseIsPressed && mouseX >= 475 && mouseY >= 370 && mouseX <= 805 && mouseY <= 570 && endCG11Unlock == true) {
+            galleryImages4();
         }
     }
     else if (state === `credits`) {
@@ -410,39 +441,25 @@ function actButtons() {
 }
 
 /**
- * The gallery function, which is also a state, is broken in two parts (gallery2 being the other part)
+ * The gallery function, which is also a state, is broken in 4 parts all named accordingly to their page. What the function does is first call the background (which is just purple with the numbers at the buttom and finally the back button) then calls for the actual images whether they are unlocked or not
+ * Please count gallery 2,3,4 in the same category as this one
 */
 function gallery() {
-    //back rectangle
-    rect(70, 600, 150, 60);
-
     push()
-    fill(255)
-    textSize(30)
-    text("CGS ... Page 1.", 90, 80)
+    imageMode(CORNER)
+    image(galleryBG, 0, 0, 1280, 720);
     pop()
 
+    //A semi transparent rectangle that goes on top of the page number, it's just to show which page you are on
     push()
-    fill(255, 0, 0)
-    textSize(30)
-    text("< BACK", 90, 640)
-    pop()
-
-    //next rectangle
-    rect(1060, 600, 150, 60);
-
-    push()
-    fill(255, 0, 0)
-    textSize(30)
-    text("NEXT >", 1080, 640)
-    pop()
-
-    push()
-    fill(255, 0, 0)
-    rect(405, 570, 100, 80)
+    noStroke()
+    fill(255, 255, 255, 100)
+    rect(520, 622, 20, 30);
     pop()
 
     //CG 1
+    //IF unlock is false, it will show the placeholders, which I'm emotionally attached to so they are still in game
+    //HOWEVER if it's true, then it will show the actual cg as a preview
     push()
     if (CG1Unlock == false) {
         imageMode(CORNER)
@@ -520,27 +537,17 @@ function gallery2() {
     rect(70, 600, 150, 60);
 
     push()
-    fill(255)
-    textSize(30)
-    text("CGS ... Page 2.", 90, 80)
+    imageMode(CORNER)
+    image(galleryBG, 0, 0, 1280, 720);
     pop()
 
     push()
-    fill(255, 0, 0)
-    textSize(30)
-    text("< BACK", 90, 640)
+    noStroke()
+    fill(255, 255, 255, 100)
+    rect(592, 622, 20, 30);
     pop()
 
-    //next rectangle
-    rect(1060, 600, 150, 60);
-
-    push()
-    fill(255, 0, 0)
-    textSize(30)
-    text("NEXT >", 1080, 640)
-    pop()
-
-    //CG 1
+    //CG 7
     push()
     if (CG7Unlock == false) {
         imageMode(CORNER)
@@ -552,7 +559,7 @@ function gallery2() {
     }
     pop()
 
-    //CG 2
+    //CG 8
     push()
     if (CG8Unlock == false) {
         imageMode(CORNER)
@@ -564,7 +571,7 @@ function gallery2() {
     }
     pop()
 
-    //CG 3
+    //CG 9
     push()
     if (CG9Unlock == false) {
         imageMode(CORNER)
@@ -576,7 +583,7 @@ function gallery2() {
     }
     pop()
 
-    //CG 4
+    //CG 10
     push()
     if (CG10Unlock == false) {
         imageMode(CORNER)
@@ -590,85 +597,171 @@ function gallery2() {
 }
 
 function gallery3() {
-    //back rectangle
-    rect(70, 600, 150, 60);
-
     push()
-    fill(255)
-    textSize(30)
-    text("Ending Cards ... Page 1.", 90, 80)
+    imageMode(CORNER)
+    image(galleryBG, 0, 0, 1280, 720);
     pop()
 
     push()
-    fill(255, 0, 0)
-    textSize(30)
-    text("< BACK", 90, 640)
+    noStroke()
+    fill(255, 255, 255, 100)
+    rect(665, 622, 20, 30);
     pop()
 
-    //next rectangle
-    rect(1060, 600, 150, 60);
-
+    //End CG 1
     push()
-    fill(255, 0, 0)
-    textSize(30)
-    text("NEXT >", 1080, 640)
-    pop()
-
-    //CG 1
-    push()
-    if (CG7Unlock == false) {
+    if (endCG1Unlock == false) {
         imageMode(CORNER)
         image(galleryPlaceholder, 75, 100, 330, 200);
     }
-    if (CG7Unlock == true) {
+    if (endCG1Unlock == true) {
         imageMode(CORNER)
-        image(CG7, 75, 100, 330, 200);
+        image(endCG1, 75, 100, 330, 200);
     }
     pop()
 
-    //CG 2
+    //End CG 2
     push()
-    if (CG8Unlock == false) {
+    if (endCG2Unlock == false) {
         imageMode(CORNER)
         image(galleryPlaceholder6, 475, 100, 330, 200);
     }
-    if (CG8Unlock == true) {
+    if (endCG2Unlock == true) {
         imageMode(CORNER)
-        image(CG8, 475, 100, 330, 200);
+        image(endCG2, 475, 100, 330, 200);
     }
     pop()
 
-    //CG 3
+    //End CG 3
     push()
-    if (CG9Unlock == false) {
+    if (endCG3Unlock == false) {
         imageMode(CORNER)
         image(galleryPlaceholder4, 875, 100, 330, 200);
     }
-    if (CG9Unlock == true) {
+    if (endCG3Unlock == true) {
         imageMode(CORNER)
-        image(CG9, 875, 100, 330, 200);
+        image(endCG3, 875, 100, 330, 200);
     }
     pop()
 
-    //CG 4
+    //End CG 4
     push()
-    if (CG10Unlock == false) {
+    if (endCG4Unlock == false) {
         imageMode(CORNER)
         image(galleryPlaceholder3, 75, 370, 330, 200);
     }
-    if (CG10Unlock == true) {
+    if (endCG4Unlock == true) {
         imageMode(CORNER)
-        image(CG10, 75, 370, 330, 200);
+        image(endCG4, 75, 370, 330, 200);
+    }
+    pop()
+
+    //End CG 5
+    push()
+    if (endCG5Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder5, 475, 370, 330, 200);
+    }
+    if (endCG5Unlock == true) {
+        imageMode(CORNER)
+        image(endCG5, 475, 370, 330, 200);
+    }
+    pop()
+
+    //End CG 6
+    push()
+    if (endCG6Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder2, 875, 370, 330, 200);
+    }
+    if (endCG6Unlock == true) {
+        imageMode(CORNER)
+        image(endCG6, 875, 370, 330, 200);
     }
     pop()
 }
 
+function gallery4() {
+    push()
+    imageMode(CORNER)
+    image(galleryBG, 0, 0, 1280, 720);
+    pop()
+
+    push()
+    noStroke()
+    fill(255, 255, 255, 100)
+    rect(738, 622, 20, 30);
+    pop()
+
+    //End CG 7
+    push()
+    if (endCG7Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder, 75, 100, 330, 200);
+    }
+    if (endCG7Unlock == true) {
+        imageMode(CORNER)
+        image(endCG7, 75, 100, 330, 200);
+    }
+    pop()
+
+    //End CG 8
+    push()
+    if (endCG8Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder6, 475, 100, 330, 200);
+    }
+    if (endCG8Unlock == true) {
+        imageMode(CORNER)
+        image(endCG8, 475, 100, 330, 200);
+    }
+    pop()
+
+    //End CG 9
+    push()
+    if (endCG9Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder4, 875, 100, 330, 200);
+    }
+    if (endCG9Unlock == true) {
+        imageMode(CORNER)
+        image(endCG9, 875, 100, 330, 200);
+    }
+    pop()
+
+    //End CG 0
+    push()
+    if (endCG10Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder3, 75, 370, 330, 200);
+    }
+    if (endCG10Unlock == true) {
+        imageMode(CORNER)
+        image(endCG10, 75, 370, 330, 200);
+    }
+    pop()
+
+    //End CG 11
+    push()
+    if (endCG11Unlock == false) {
+        imageMode(CORNER)
+        image(galleryPlaceholder5, 475, 370, 330, 200);
+    }
+    if (endCG11Unlock == true) {
+        imageMode(CORNER)
+        image(endCG11, 475, 370, 330, 200);
+    }
+    pop()
+}
+/*
+* if passing a certain scene, the cgunlock will change to true which means that then in the gallery it will show the actual cg and you can zoom in the image
+*/
 function galleryImageUnlock() {
     if (scene == 55 && CG1Unlock == false) {
         CG1Unlock = true;
     }
 
-    if (scene == 55 && CG2Unlock == false) {
+    if (scene == 90 && CG2Unlock == false) {
         CG2Unlock = true;
     }
 
@@ -716,13 +809,18 @@ function credits() {
     rect(500, 50, 500, 625);
     pop()
 
+    //Loading the images on the bottom of the credits + stating their position.
+    image(clown, 550, 500)
+    image(laCreatura, 750, 500, 150, 150)
+
+    //displaying all the text + location
     push();
     fill(0)
     textSize(20)
-    text("CREDITS!!!\n\n\nCode: Me \n\nllustrations: Me!!! Also background from Adobe \nStock cuz I am not drawing backgrounds do I \nlook like I understand perspective.\nAlso character inspirations to my homie miHoYo \n\nUnexisting Music: Snowfall by Scott Buckley\nOne Last Glance and DOOMED by Invadable \nHarmony\nOld Doll by Bluerra-sai\n\n\n (I'll add full credits when\n I'm done in true animator\n fashion)", 550, 100)
+    text("CREDITS!!!\n\nCode: Me, assistance and inspiration \nfrom Pippin Barr, Mathilde, michellu0929 and \ncfoss.\n\nllustrations: Me!!! Also background from Adobe \nStock cuz I am not drawing backgrounds do I \nlook like I understand perspective.\nAlso character inspirations to my homie miHoYo \n\nUnexisting Music: Snowfall by Scott Buckley\nOne Last Glance and DOOMED by Invadable \nHarmony\nOld Doll by Bluerra-sai\nUndercover Spy Agent and Detective Caution by \nFesliyan Studios", 550, 100)
     pop();
 
-
+    //BACK button, I wanted the white button
     rect(70, 600, 150, 60);
     push()
     fill(255, 0, 0)
@@ -731,6 +829,9 @@ function credits() {
     pop()
 }
 
+/*
+* Calling for all the functions that are supposed to be there all the time in the main game (draw())
+*/
 function simulation() {
     backgroundsForScenes();
     sprites();
@@ -771,13 +872,6 @@ function menu() {
 }
 
 function mainimgs() {
-
-    // push()
-    // let bgName = scenes[scene].bg;
-    // imageMode(CENTER)
-    // image(backgrounds[bgName], width / 2, 500);
-    // pop()
-
     //TEXTBOX
     push()
     fill(255, 200);
@@ -786,6 +880,7 @@ function mainimgs() {
     pop()
     image(arrow, 1100, 550, 100, 100)
 
+    //MENU DISPLAY TEXT
     push()
     fill(255);
     rectMode(CORNER);
@@ -806,6 +901,7 @@ function vntext() {
     text(scenes[scene].name, 100, 510, 300);
     pop();
 
+    //Display the box for when the piano parts
     if (scene == 156 || scene == 192 || scene == 271) {
         push();
         rectMode(CENTER)
@@ -818,9 +914,11 @@ function vntext() {
     }
 }
 
+/*
+* Display for all the choice boxes + text
+*/
 function choices() {
-
-    // CHOICE TEXT BOXES
+    //CHOICE TEXT BOXES
     //CHOICE 1
     if (scene == 10) {
         push();
@@ -1147,6 +1245,9 @@ function choices() {
     }
 }
 
+/*
+* Displaying all the sprites at certain scenes and stop the displaying when it's not supposed to
+*/
 function sprites() {
     //GUARD SCENE ALONE
     if (scene >= 25 && scene <= 54) {
@@ -1234,7 +1335,7 @@ function sprites() {
     }
 
     //DELTA ALONE
-    if ((scene >= 162 && scene <= 175) || (scene >= 276 && scene <= 308) || (scene >= 349 && scene <= 372) || (scene >= 375 && scene <= 390)) {
+    if ((scene >= 162 && scene <= 175) || (scene >= 276 && scene <= 308) || (scene >= 349 && scene <= 372) || (scene >= 375 && scene <= 406)) {
         push();
         imageMode(CENTER);
         image(deltaSerious, width / 2, 400, 425, 739);
@@ -1292,24 +1393,31 @@ function backgroundsForScenes() {
     }
 }
 
+/*
+* The mouse pressed functions. Since the game functions mostly by clicking, a lot of the code goes here.
+*/
 function mousePressed() {
     allMenuButtons()
+    galleryPageButtons()
     nameInput()
 
+    //If mouse is in the x and y coordinates stated, it will go in the next scene. However, if it's in specific (exceptions) scenes, the area will not be able to be clicked
     if (state === `simulation` && mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene !== 10 && scene !== 16 && scene !== 25 && scene !== 38 && scene !== 47 && scene !== 52 && scene !== 77 && scene !== 82 && scene !== 98 && scene !== 114 && scene !== 122 && scene !== 127 && scene !== 156 && scene !== 192 && scene !== 200 && scene !== 207 && scene !== 256 && scene !== 271 && scene !== 275 && scene !== 297 && scene !== 308 && scene !== 332 && scene !== 339 && scene !== 344 && scene !== 348 && scene !== 359 && scene !== 371 && scene !== 392 && scene !== 406 && scene !== 424 && scene !== 426 && scene !== 432 && scene !== 444 && scene !== 459 && scene !== 463) {
         scene += 1;
-        console.log(scene)
 
+        //The music is activated by mouse hence why it's put here.
         music();
     }
 
     //SECRET ENDING
+    //if the scene is 308, it will split in two. If the secret ending is true, then the scene will change to 433, in which opens the secret ending. But if it's false, continue the scene as normal.
     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 308 && secretEnding == true) {
         scene = 433;
     } else if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 308 && secretEnding == false) {
         scene++;
     }
 
+    //These (choices) follow the same formula. Basically, if the mouse is in one location, click that option and change scenes
     //CHOICE 1
     //CHOICE 1A
     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 10) {
@@ -1345,6 +1453,7 @@ function mousePressed() {
     }
 
     //Guard TEXT (52)
+    //This one mentions that if the guardTalk is true, then change to include the extra dialogue
     if (mouseX >= 1100 && mouseX <= 1200 && mouseY >= 550 && mouseY <= 650 && scene == 52 && guardTalk == true) {
         scene += 1;
     }
@@ -1355,6 +1464,7 @@ function mousePressed() {
 
     //CHOICE 4
     //CHOICE 4A
+    //Increase in intimacy for V which will be used later
     if (mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327 && scene == 77) {
         scene = 78;
         vLikeBar++
@@ -1421,6 +1531,7 @@ function mousePressed() {
     }
 
     //CHOICE 8B
+    //This is a fake option, meaning that no matter which choice you choose, you will get to the next scene anyways
     if (((mouseX >= 490 && mouseX <= 790 && mouseY >= 273 && mouseY <= 327) || (mouseX >= 430 && mouseX <= 850 && mouseY >= 390 && mouseY <= 444)) && scene == 200) {
         scene++;
     }
@@ -1488,6 +1599,7 @@ function mousePressed() {
     }
 
     //CHOICE 13A
+    //If you took all the options to increase the vLikeBar are chosen, this option will appear and be available.
     if (mouseX >= 465 && mouseX <= 815 && mouseY >= 273 && mouseY <= 327 && scene == 339 && vLikeBar >= 3) {
         scene = 340;
     }
@@ -1544,6 +1656,7 @@ function mousePressed() {
 
 function nameInput() {
 
+    //Displaying the text + what you write inside of the dialogue input
     if (scene === 275) {
         push()
         fill(255)
@@ -1561,8 +1674,8 @@ function nameInput() {
         text(content, width / 2, height / 2);
         pop()
     }
-    console.log(secretEnding)
 
+    //if the name input is the same as the one in nameContent, then it will unlock the secret ending . if not, it will stay false
     if (scene === 275) {
         if (content === nameContent) {
             secretEnding = true;
@@ -1572,6 +1685,7 @@ function nameInput() {
     }
 }
 
+//Allows the user to type in the game. Only on scene 275
 function keyTyped() {
     if (scene === 275) {
         content += key;
@@ -1583,16 +1697,17 @@ function keyTyped() {
 
 }
 
+//Allows the user to delete any letters if they do a mistake
 function keyReleased() {
     if (keyCode == BACKSPACE) {
         content = content.substring(0, content.length - 1);
     }
 }
 
+/*
+* All the menu buttons are here then being called in mousePressed so you can press it. Pressing around the areas that the mouse allows makes it that it will change state to whatever is mentioned in the if
+*/
 function allMenuButtons() {
-    // if (state === `title` && mouseX >= 926 && mouseY >= 237 && mouseX <= 1193 && mouseY <= 287) {
-    //     state = `simulation`;
-    // }
 
     if (state === `title` && mouseX >= 926 && mouseY >= 237 && mouseX <= 1193 && mouseY <= 287) {
         state = `actButtons`;
@@ -1611,6 +1726,7 @@ function allMenuButtons() {
         state = `gallery`;
     }
 
+    //if from actButtons you press the gallery, it will reset the act buttons to their original position
     if (state === `actButtons` && mouseX >= 926 && mouseX <= 1193 && mouseY >= 395 && mouseY <= 449) {
         state = `gallery`;
 
@@ -1623,28 +1739,13 @@ function allMenuButtons() {
         state = `credits`;
     }
 
+    //if from actButtons you press the credits, it will reset the act buttons to their original position
     if (state === `actButtons` && mouseX >= 926 && mouseY >= 552 && mouseX <= 1193 && mouseY <= 602) {
         state = `credits`;
 
         act1ArrowOriginalPos = 257;
         act2ArrowOriginalPos = 257;
         actButtonsShow = false;
-    }
-
-    if (state === `gallery` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
-        state = `title`;
-    }
-
-    if (state === `gallery2` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
-        state = `gallery`;
-    }
-
-    if (state === `gallery` && mouseX >= 1060 && mouseY >= 600 && mouseX <= 1210 && mouseY <= 660) {
-        state = `gallery2`;
-    }
-
-    if (state === `gallery2` && mouseX >= 1060 && mouseY >= 600 && mouseX <= 1210 && mouseY <= 660) {
-        state = `gallery3`;
     }
 
     if (state === `credits` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
@@ -1655,6 +1756,7 @@ function allMenuButtons() {
         state = `menu`;
     }
 
+    //if from the ingame menu you press to go back in the title screen, it will reset everything, starting with the inner animations like the act bar, but then also quieting down the music, resetting the scene count, and resetting any variables
     if (state === `menu` && mouseX >= 470 && mouseY >= 478 && mouseX <= 528 && mouseY <= 500) {
         state = `title`;
         scene = 0;
@@ -1666,10 +1768,13 @@ function allMenuButtons() {
         content = ""
         vLikeBar = 0
 
-        doomedMusic.setVolume(0, 2);
-        oldDoll.setVolume(0, 2);
-        snowMusic.setVolume(0, 2);
+        //Makes the voume of the music go down if you decide to quit the game midway
         lastMusic.setVolume(0, 2);
+        roomMusic.setVolume(0, 2);
+        oldDoll.setVolume(0, 2);
+        doomedMusic.setVolume(0, 2);
+        snowMusic.setVolume(0, 2);
+        officeMusic.setVolume(0, 2);
     }
 
     if (state === `menu` && mouseX >= 730 && mouseY >= 478 && mouseX <= 770 && mouseY <= 500) {
@@ -1677,6 +1782,82 @@ function allMenuButtons() {
     }
 }
 
+//Self explanatory, it is a function called in mousePressed that is for all the gallery buttons. At any part where the gallery is pressed, there will be something to gappen. For example, all of these buttons are for the page buttons and for them to be able to press at the other pages of the gallery from eachother. There is also the button to go back which is valid on any page of the gallery. This is just a seperate function because of how long it is
+function galleryPageButtons() {
+    if (state === `gallery` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
+        state = `title`;
+    }
+
+    if (state === `gallery` && mouseX >= 592 && mouseY >= 622 && mouseX <= 612 && mouseY <= 652) {
+        state = `gallery2`;
+    }
+
+    if (state === `gallery` && mouseX >= 665 && mouseY >= 622 && mouseX <= 685 && mouseY <= 652) {
+        state = `gallery3`;
+    }
+
+    if (state === `gallery` && mouseX >= 738 && mouseY >= 622 && mouseX <= 758 && mouseY <= 652) {
+        state = `gallery4`;
+    }
+
+    //GALLERY 2
+
+    if (state === `gallery2` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
+        state = `title`;
+    }
+
+    if (state === `gallery2` && mouseX >= 520 && mouseY >= 622 && mouseX <= 540 && mouseY <= 652) {
+        state = `gallery`;
+    }
+
+    if (state === `gallery2` && mouseX >= 665 && mouseY >= 622 && mouseX <= 685 && mouseY <= 652) {
+        state = `gallery3`;
+    }
+
+    if (state === `gallery2` && mouseX >= 738 && mouseY >= 622 && mouseX <= 758 && mouseY <= 652) {
+        state = `gallery4`;
+    }
+
+    //GALLERY 3
+
+    if (state === `gallery3` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
+        state = `title`;
+    }
+
+    if (state === `gallery3` && mouseX >= 520 && mouseY >= 622 && mouseX <= 540 && mouseY <= 652) {
+        state = `gallery`;
+    }
+
+    if (state === `gallery3` && mouseX >= 592 && mouseY >= 622 && mouseX <= 612 && mouseY <= 652) {
+        state = `gallery2`;
+    }
+
+    if (state === `gallery3` && mouseX >= 738 && mouseY >= 622 && mouseX <= 758 && mouseY <= 652) {
+        state = `gallery4`;
+    }
+
+    //GALLERY 4
+
+    if (state === `gallery4` && mouseX >= 70 && mouseY >= 600 && mouseX <= 220 && mouseY <= 660) {
+        state = `title`;
+    }
+
+    if (state === `gallery4` && mouseX >= 520 && mouseY >= 622 && mouseX <= 540 && mouseY <= 652) {
+        state = `gallery`;
+    }
+
+    if (state === `gallery4` && mouseX >= 592 && mouseY >= 622 && mouseX <= 612 && mouseY <= 652) {
+        state = `gallery2`;
+    }
+
+    if (state === `gallery4` && mouseX >= 665 && mouseY >= 622 && mouseX <= 685 && mouseY <= 652) {
+        state = `gallery3`;
+    }
+}
+
+/*
+* The gallery this one to 2,3,4 are all the same premise, If the mouse is pressed at a specific location (aka their preview) then it will be expanded to the whole screen. However, that only work if the CG is unlocked, beacuse if the unlock is false, it will not zoom in.
+*/
 function galleryImages() {
     if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && CG1Unlock == true) {
         push()
@@ -1764,9 +1945,90 @@ function galleryImages2() {
         image(CG6, 0, 0, 1280, 720);
         pop()
     }
-
 }
 
+function galleryImages3() {
+    if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && endCG1Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG1, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && endCG2Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG2, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && endCG3Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG3, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && endCG4Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG4, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 475 && mouseY >= 370 && mouseX <= 805 && mouseY <= 570 && endCG5Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG5, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 875 && mouseY >= 370 && mouseX <= 1205 && mouseY <= 570 && endCG6Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG6, 0, 0, 1280, 720);
+        pop()
+    }
+}
+
+function galleryImages4() {
+    if (mouseIsPressed && mouseX >= 75 && mouseY >= 100 && mouseX <= 405 && mouseY <= 300 && endCG7Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG7, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 475 && mouseY >= 100 && mouseX <= 805 && mouseY <= 300 && endCG8Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG8, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 875 && mouseY >= 100 && mouseX <= 1205 && mouseY <= 300 && endCG9Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG9, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 75 && mouseY >= 370 && mouseX <= 405 && mouseY <= 570 && endCG10Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG10, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (mouseIsPressed && mouseX >= 475 && mouseY >= 370 && mouseX <= 805 && mouseY <= 570 && endCG11Unlock == true) {
+        push()
+        imageMode(CORNER)
+        image(endCG11, 0, 0, 1280, 720);
+        pop()
+    }
+}
+
+// Overlay to be right on top of the textbox for dramatic effect for that one scene
 function overlayGraphic() {
     if (scene == 384) {
         push()
@@ -1776,11 +2038,19 @@ function overlayGraphic() {
     }
 }
 
+//All the CGs, basically displaying all the images on specific scenes only, when its not between the scenes stated, it will not show.
 function cinematicGraphics() {
     if (scene >= 55 && scene <= 60) {
         push()
         imageMode(CORNER);
         image(CG1, 0, 0, 1280, 720);
+        pop()
+    }
+
+    if (scene >= 90 && scene <= 102) {
+        push()
+        imageMode(CORNER);
+        image(CG2, 0, 0, 1280, 720);
         pop()
     }
 
@@ -1827,13 +2097,6 @@ function cinematicGraphics() {
         pop();
     }
 
-    if (scene == 391) {
-        push()
-        imageMode(CORNER);
-        image(endCG62, 0, 0, 1280, 720);
-        pop()
-    }
-
     if (scene >= 417 && scene <= 432) {
         push()
         imageMode(CORNER);
@@ -1856,6 +2119,9 @@ function cinematicGraphics() {
     }
 }
 
+/*
+* displaying the ending images and would then unlock the ending cg. Finally it will call the back to menu function that will be explained later
+*/
 function endingGraphics() {
 
     //ENDING 1
@@ -1864,6 +2130,8 @@ function endingGraphics() {
         imageMode(CORNER);
         image(endCG1, 0, 0, 1280, 720);
         pop()
+
+        endCG1Unlock = true;
 
         backToMainMenu()
     }
@@ -1875,6 +2143,8 @@ function endingGraphics() {
         image(endCG2, 0, 0, 1280, 720);
         pop()
 
+        endCG2Unlock = true;
+
         backToMainMenu()
     }
 
@@ -1884,6 +2154,8 @@ function endingGraphics() {
         imageMode(CORNER);
         image(endCG3, 0, 0, 1280, 720);
         pop()
+
+        endCG3Unlock = true;
 
         backToMainMenu()
     }
@@ -1895,6 +2167,8 @@ function endingGraphics() {
         image(endCG4, 0, 0, 1280, 720);
         pop()
 
+        endCG4Unlock = true;
+
         backToMainMenu()
     }
 
@@ -1905,6 +2179,8 @@ function endingGraphics() {
         image(endCG5, 0, 0, 1280, 720);
         pop()
 
+        endCG5Unlock = true;
+
         backToMainMenu()
     }
 
@@ -1913,6 +2189,8 @@ function endingGraphics() {
         push()
         imageMode(CORNER);
         image(endCG6, 0, 0, 1280, 720);
+
+        endCG6Unlock = true;
 
         backToMainMenu()
     }
@@ -1923,6 +2201,8 @@ function endingGraphics() {
         imageMode(CORNER);
         image(endCG7, 0, 0, 1280, 720);
 
+        endCG7Unlock = true;
+
         backToMainMenu()
     }
 
@@ -1931,6 +2211,8 @@ function endingGraphics() {
         push()
         imageMode(CORNER);
         image(endCG8, 0, 0, 1280, 720);
+
+        endCG8Unlock = true;
 
         backToMainMenu()
     }
@@ -1942,6 +2224,8 @@ function endingGraphics() {
         image(endCG9, 0, 0, 1280, 720);
         pop()
 
+        endCG9Unlock = true;
+
         backToMainMenu()
     }
 
@@ -1951,6 +2235,8 @@ function endingGraphics() {
         imageMode(CORNER);
         image(endCG10, 0, 0, 1280, 720);
         pop()
+
+        endCG10Unlock = true;
 
         backToMainMenu()
     }
@@ -1962,10 +2248,15 @@ function endingGraphics() {
         image(endCG11, 0, 0, 1280, 720);
         pop()
 
+        endCG11Unlock = true;
+
         backToMainMenu()
     }
 }
 
+/*
+* Not only is it only stating rectangle and replay button, but its also saying that if the mouse that is in specific coordinations, and pressed, it will reset the game such as stop the music, reset variables, and reset the scenes.
+*/
 function backToMainMenu() {
     push()
     fill(255, 255, 255, 200)
@@ -1986,21 +2277,17 @@ function backToMainMenu() {
         content = "";
         vLikeBar = 0;
 
-        doomedMusic.setVolume(0, 2);
-        oldDoll.setVolume(0, 2);
-        snowMusic.setVolume(0, 2);
+        //technically this is for the end CGs but I still added all the music to go down in volume because you never know
         lastMusic.setVolume(0, 2);
+        roomMusic.setVolume(0, 2);
+        oldDoll.setVolume(0, 2);
+        doomedMusic.setVolume(0, 2);
+        snowMusic.setVolume(0, 2);
+        officeMusic.setVolume(0, 2);
     }
 }
 
-function specialText() {
-    if (scene == 64) {
-        //textStyle(ITALIC)
-    } if (scene == 65) {
-        textStyle(NORMAL)
-    }
-}
-
+//for the piano sequence, making it that when you press it will play one note from the array and would start "splicing" from the scene
 function keyPressed() {
     if (scene == 156) {
         playNextNote()
@@ -2049,7 +2336,12 @@ function playNextNote() {
     }
 }
 
+/*
+* Start playing all the audio and music from the game at certain points of the story.
+*/
 function music() {
+
+    //SNOW SCENE MUSIC
     if (scene === 4) {
         snowMusic.play();
         snowMusic.loop();
@@ -2057,13 +2349,48 @@ function music() {
         snowMusic.setVolume(1, 2);
     }
 
-    if (scene === 305) {
+    //HALLWAY MUSIC
+    if ((scene === 51) || (scene === 135) || (scene === 171) || (scene === 305)) {
+        snowMusic.setVolume(0, 2);
+        officeMusic.setVolume(0, 2);
+        snowMusic.stop()
+        officeMusic.stop()
+        roomMusic.setVolume(0, 2);
+        roomMusic.stop()
+
         doomedMusic.play();
         doomedMusic.loop();
         doomedMusic.setVolume(0);
         doomedMusic.setVolume(1, 2);
     }
 
+    //OFFICE MUSIC
+    if (scene === 90) {
+        doomedMusic.setVolume(0, 2);
+        doomedMusic.stop()
+
+        officeMusic.play();
+        officeMusic.loop();
+        officeMusic.setVolume(0);
+        officeMusic.setVolume(1, 2);
+    }
+
+    //ROOM + LAB MUSIC
+    if (scene === 161 || scene === 175 || scene === 197 || scene === 276) {
+        doomedMusic.setVolume(0, 2);
+        doomedMusic.stop()
+        officeMusic.setVolume(0, 2);
+        officeMusic.stop()
+        roomMusic.setVolume(0, 2);
+        roomMusic.stop()
+
+        doomedMusic.stop();
+        roomMusic.loop();
+        roomMusic.setVolume(0);
+        roomMusic.setVolume(1, 2);
+    }
+
+    //PANIC HALLWAY SCENE
     if (scene === 317) {
         doomedMusic.setVolume(0, 2);
 
@@ -2073,6 +2400,7 @@ function music() {
         lastMusic.setVolume(1, 2);
     }
 
+    //ENDING LAB MUSIC
     if ((scene === 384) || (scene === 411)) {
         lastMusic.setVolume(0, 2);
 
@@ -2082,5 +2410,12 @@ function music() {
         oldDoll.setVolume(1, 2);
     }
 
+    //STOP ALL MUSIC
+    if ((scene === 152) || (scene === 188) || scene === 269) {
+        lastMusic.setVolume(0, 2);
+        doomedMusic.setVolume(0, 2);
+        snowMusic.setVolume(0, 2);
+        officeMusic.setVolume(0, 2);
+    }
 }
 

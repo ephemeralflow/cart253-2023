@@ -360,7 +360,7 @@ let scenes = [{
     bg: "hallwayBG",
 }, {
     name: " ",
-    txt: "Walking into the room, you were greeted by who you guessed was The Doctor sitting at a table as he got up from his chair.",
+    txt: "Walking into the room, you were greeted by who you guessed was The Doctor sitting at a table doing paperwork.",
     bg: "officeBG",
 }, {
     name: "Doctor", //91
@@ -408,7 +408,7 @@ let scenes = [{
     bg: "officeBG",
 }, {
     name: " ",
-    txt: "The Doctor walked back to his desk as he grabbed a paper from a cabinet.",
+    txt: "Getting up from his desk, The Doctor put on his lab coat, removed his reading glasses and finally grabbed some papers from a cabinet.",
     bg: "officeBG",
 }, {
     name: "Doctor",
