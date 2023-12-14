@@ -837,7 +837,6 @@ function simulation() {
     choices();
     endingGraphics();
     overlayGraphic();
-    specialText();
     if (scene === 275) {
         nameInput();
     }
