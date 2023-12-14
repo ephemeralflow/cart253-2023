@@ -2,7 +2,7 @@
  * M.A.N.T.I.S. ANATOMY
  * Scarlett Perez
  * 
- * STILL WORK IN PROGRESS 
+ * I need to change something so it actually uploads to um. This is my project, it's still a work in progress (I want to make it prettier) 
  */
 "use strict";
 
