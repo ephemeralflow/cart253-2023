@@ -2287,7 +2287,6 @@ function keyPressed() {
     if (scene == 156) {
         playNextNote()
         endPianoTimer++;
-        console.log(endPianoTimer)
         if (endPianoTimer >= pianoPartLength) {
             scene = 157
             endPianoTimer = 0;
@@ -2299,7 +2298,6 @@ function keyPressed() {
 
         playNextNote()
         endPianoTimer++;
-        console.log(endPianoTimer)
         if (endPianoTimer >= pianoPartLength) {
             scene = 193
             endPianoTimer = 0;
@@ -2310,7 +2308,6 @@ function keyPressed() {
     if (scene == 271) {
         playNextNote()
         endPianoTimer++;
-        console.log(endPianoTimer)
         if (endPianoTimer >= pianoPartLength) {
             scene = 272
             endPianoTimer = 0;
