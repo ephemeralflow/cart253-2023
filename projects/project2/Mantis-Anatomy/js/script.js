@@ -8,7 +8,7 @@
 
 //CURRENT STATE + SCENE
 let state = `title`
-let scene = 300;
+let scene = 0;
 
 //variables for the name and the text they dau
 let name = " ";
