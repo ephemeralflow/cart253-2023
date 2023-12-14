@@ -7,7 +7,7 @@
 "use strict";
 
 //CURRENT STATE + SCENE
-let state = `credits`
+let state = `title`
 let scene = 300;
 
 //variables for the name and the text they dau
