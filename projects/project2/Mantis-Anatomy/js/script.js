@@ -181,12 +181,12 @@ function preload() {
     endCG3 = loadImage('assets/images/ENDCGS/EndCG3.png');
     endCG4 = loadImage('assets/images/ENDCGS/EndCG4.png');
     endCG5 = loadImage('assets/images/ENDCGS/EndCG5.png');
-    endCG6 = loadImage('assets/images/ENDCGS/endCG6.png');
-    endCG7 = loadImage('assets/images/ENDCGS/endCG7.png');
-    endCG8 = loadImage('assets/images/ENDCGS/endCG8.png');
-    endCG9 = loadImage('assets/images/ENDCGS/endCG9.png');
-    endCG10 = loadImage('assets/images/ENDCGS/endCG10.png');
-    endCG11 = loadImage('assets/images/ENDCGS/endCG11.png');
+    endCG6 = loadImage('assets/images/ENDCGS/EndCG6.png');
+    endCG7 = loadImage('assets/images/ENDCGS/EndCG7.png');
+    endCG8 = loadImage('assets/images/ENDCGS/EndCG8.png');
+    endCG9 = loadImage('assets/images/ENDCGS/EndCG9.png');
+    endCG10 = loadImage('assets/images/ENDCGS/EndCG10.png');
+    endCG11 = loadImage('assets/images/ENDCGS/EndCG11.png');
 
     doctorSmile = loadImage('assets/images/sprites/doctorSmile.png');
 
