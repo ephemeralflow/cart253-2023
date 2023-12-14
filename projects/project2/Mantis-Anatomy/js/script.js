@@ -110,9 +110,7 @@ let endPianoTimer = 0;
 let pianoPartLength = 10;
 
 //SPRITES
-let doctorSerious;
 let doctorSmile;
-let doctorGrin;
 
 let vSmile;
 let vWorried;
@@ -190,9 +188,7 @@ function preload() {
     endCG10 = loadImage('assets/images/ENDCGS/endCG10.png');
     endCG11 = loadImage('assets/images/ENDCGS/endCG11.png');
 
-    doctorSerious = loadImage('assets/images/sprites/doctorSerious.png');
     doctorSmile = loadImage('assets/images/sprites/doctorSmile.png');
-    doctorGrin = loadImage('assets/images/sprites/doctorGrin.png');
 
     vSmile = loadImage('assets/images/sprites/vSmile.png');
     vWorried = loadImage('assets/images/sprites/vWorried.png');
